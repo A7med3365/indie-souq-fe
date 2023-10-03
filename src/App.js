@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import Films from './pages/Films';
+import Tests from './pages/Tests';
 import { Routes, Route } from 'react-router-dom';
 
 export default function App() {
@@ -10,7 +11,8 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/discover" element={<Films />} />
+        <Route path="/films" element={<Films />} />
+        <Route path="/t" element={<Tests />} />
       </Routes>
     </div>
   );

@@ -5,6 +5,7 @@ import SelectedCreators from '../components/SelectedCreators';
 import SepLine from '../components/SepLine';
 import Faq from '../components/Faq';
 import Footer from '../components/Footer';
+import SelectedComments from '../components/SelectedComments';
 export default function HomePage() {
   let slides = [
     './banner-sample.png',
@@ -54,14 +55,30 @@ export default function HomePage() {
       text: defaultContent,
     },
   ];
+  let trending = [
+    {
+      BgImg: './trending-1.jpeg',
+      percentage: 88,
+      label: 'Trending Now',
+      title: 'Movie Name',
+      by: 'Mohamed Jasim',
+    },
+    {
+      BgImg: './trending-2.png',
+      percentage: 20,
+      label: 'Most Viewed',
+      title: 'OASIS',
+      by: 'Salman Ali',
+    },
+  ];
   return (
     <div>
-      <div className="max-w-screen-2xl m-auto">
+      <div className="max-w-[1440px] m-auto">
         <Carousel slides={slides} />
       </div>
       <div className="max-w-[1150px] m-auto gap-5 pt-8 flex justify-center">
-        <TrendCard BgImg={'./trending-1.jpeg'} />
-        <TrendCard BgImg={'./trending-2.png'} />
+        <TrendCard content={trending[0]} />
+        <TrendCard content={trending[1]} />
       </div>
       <SepLine />
       <div className="text-gray2 text-4xl text-center font-bold">
@@ -77,8 +94,11 @@ export default function HomePage() {
       <div className="text-gray2 text-4xl text-center font-bold">
         What User’s Say About Us
       </div>
+      <div className="flex justify-center my-12">
+        <SelectedComments />
+      </div>
       <SepLine />
-      <div className="text-gray2 text-4xl text-center font-bold">
+      <div className="text-gray2 text-4xl text-center font-bold pb-12">
         Frequently Asked Questions
       </div>
       <div className="max-w-screen-lg m-auto my-4">

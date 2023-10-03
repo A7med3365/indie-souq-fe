@@ -32,7 +32,7 @@ export default function Navbar() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} className="bg-orange" href="#" variant="flat">
+          <Button as={Link} className="bg-orange" href="/films" variant="flat">
             <p className="text-white text-xl px-2">Discover Films</p>
           </Button>
         </NavbarItem>
