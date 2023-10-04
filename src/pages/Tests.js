@@ -1,9 +1,10 @@
 import React from 'react';
+import Rewards from '../components/Rewards';
 
 export default function () {
   return (
     <div>
-      <div className="w-full h-[500px] bg-gradient-to-t from-gray1"></div>
+      <Rewards />
     </div>
   );
 }
