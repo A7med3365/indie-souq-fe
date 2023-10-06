@@ -12,9 +12,11 @@ export default function Navbar() {
   return (
     <Nav maxWidth="2xl" className="px-5 2xl:px-0" isBlurred>
       <NavbarContent justify="start">
-        <NavbarBrand>
-          <img src="./logo.png" alt="logo" />
-        </NavbarBrand>
+        <Link href="/">
+          <NavbarBrand>
+            <img src="./logo.png" alt="logo" />
+          </NavbarBrand>
+        </Link>
       </NavbarContent>
       <NavbarContent
         className="hidden sm:flex gap-5 lg:gap-10"
