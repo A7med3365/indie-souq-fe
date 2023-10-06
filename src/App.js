@@ -6,6 +6,8 @@ import Tests from './pages/Tests';
 import ProjectDetails from './pages/ProjectDetails';
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
+import Creators from './pages/Creators';
+import Profile from './pages/Profile';
 
 export default function App() {
   return (
@@ -15,6 +17,8 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/films" element={<Films />} />
         <Route path="/details" element={<ProjectDetails />} />
+        <Route path="/creators" element={<Creators />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/t" element={<Tests />} />
       </Routes>
       <div className="bg-footerBg w-full mt-20">

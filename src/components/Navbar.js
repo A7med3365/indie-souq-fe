@@ -24,7 +24,9 @@ export default function Navbar() {
           <Link className="text-gray1 text-xl">Films</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className="text-gray1 text-xl">Creators</Link>
+          <Link className="text-gray1 text-xl" href="/creators">
+            Creators
+          </Link>
         </NavbarItem>
         <NavbarItem>
           <Link className="text-gray1 text-xl">About Us</Link>

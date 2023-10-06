@@ -4,7 +4,6 @@ import TrendCard from '../components/TrendCard';
 import SelectedCreators from '../components/SelectedCreators';
 import SepLine from '../components/SepLine';
 import Faq from '../components/Faq';
-import Footer from '../components/Footer';
 import SelectedComments from '../components/SelectedComments';
 export default function HomePage() {
   let slides = [

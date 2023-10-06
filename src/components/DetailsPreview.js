@@ -5,7 +5,7 @@ export default function DetailsPreview({ images }) {
     <div className="w-full relative flex flex-col gap-[42px]">
       <img
         className="rounded-[54px] w-[1000px]"
-        alt="NextUI hero Image with delay"
+        alt="previewed"
         src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
       />
       <div class="flex flex-col bg-white w-[750px] relative">

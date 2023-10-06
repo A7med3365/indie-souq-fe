@@ -2,7 +2,7 @@ import React from 'react';
 import Rewards from '../components/Rewards';
 import { Button, useDisclosure } from '@nextui-org/react';
 
-export default function () {
+export default function Test() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <div>

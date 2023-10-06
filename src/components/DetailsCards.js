@@ -12,7 +12,7 @@ export default function DetailsCards({ data }) {
         <div className="rounded-[27px] w-full h-[114px] border-[1px] border-[#D9D9D9]">
           <div className="px-[38px] py-[10px] flex justify-between">
             <div className="rounded-full w-[91px] h-[91px] overflow-hidden">
-              <img src="./details-profile-pic-example.png" />
+              <img alt="profile pic" src="./details-profile-pic-example.png" />
             </div>
             <div className="my-auto">
               <div className="text-[#656565] text-[23.718px] font-bold">
