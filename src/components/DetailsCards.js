@@ -1,9 +1,11 @@
 import React from 'react';
 import GenericLabel1 from '../components/GenericLabel1';
-import { Button } from '@nextui-org/react';
+import { Button, useDisclosure } from '@nextui-org/react';
 import ProgressPar from '../components/ProgressPar';
+import Rewards from './Rewards';
 
 export default function DetailsCards({ data }) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <div>
       <div className="flex flex-col w-[405px] gap-[19px]">
@@ -81,9 +83,10 @@ export default function DetailsCards({ data }) {
               </div>
             </div>
             <div className="text-center">
-              <Button className="bg-orange" variant="flat">
+              <Button className="bg-orange" onPress={onOpen} variant="flat">
                 <p className="text-white text-xl px-2">View Rewards</p>
               </Button>
+              <Rewards isOpen={isOpen} onOpenChange={onOpenChange} />
             </div>
           </div>
         </div>

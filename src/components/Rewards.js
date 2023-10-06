@@ -1,51 +1,37 @@
 import React from 'react';
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+import { Modal, ModalContent, ModalBody } from '@nextui-org/react';
 
-export default function Rewards() {
-  const Modal = () => (
-    <Popup trigger={<button className="button"> Open Modal </button>} modal>
-      <span> Modal content </span>
-    </Popup>
-  );
+export default function Rewards({ isOpen, onOpenChange }) {
   return (
-    // <div className="absolute top-0 w-full h-full">
-    //   <div className="bg-black opacity-50 absolute z-40 top-0 w-full h-full"></div>
-    //   <div className="flex justify-center content-center gap-[75px] z-50 w-full h-full">
-    //     <div className="w-[367px] h-[671px] rounded-[61px] bg-white"></div>
-    //     <div className="w-[367px] h-[671px] rounded-[61px] bg-white"></div>
-    //     <div className="w-[367px] h-[671px] rounded-[61px] bg-white"></div>
-    //   </div>
-    // </div>
-    <Popup
-      trigger={<button className="button"> Open Modal </button>}
-      modal
-      nested
-      contentStyle={{
-        background: 'rgb(0,0,0,0)',
-        border: '0',
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {(close) => (
-        <div className="text-black">
-          <div
-            className="text-white text-4xl absolute top-12 right-14 max-w-screen-2xl 2xl:top-20 2xl:right-60 align-middle pb-3"
-            onClick={close}
-          >
-            x
-          </div>
-          <div className="flex justify-center content-center gap-[75px] w-full h-full">
-            <div className="w-[367px] h-[671px] rounded-[61px] bg-white"></div>
-            <div className="w-[367px] h-[671px] rounded-[61px] bg-white"></div>
-            <div className="w-[367px] h-[671px] rounded-[61px] bg-white"></div>
-          </div>
-        </div>
-      )}
-    </Popup>
+    <div>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalBody>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+                <p>
+                  Magna exercitation reprehenderit magna aute tempor cupidatat
+                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
+                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
+                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
+                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
+                  eiusmod et. Culpa deserunt nostrud ad veniam.
+                </p>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </div>
   );
 }
