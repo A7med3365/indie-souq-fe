@@ -8,7 +8,7 @@ export default function DetailsPreview({ images }) {
         alt="previewed"
         src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
       />
-      <div class="flex flex-col bg-white w-[750px] relative">
+      <div class="flex flex-col bg-white w-full relative">
         <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
           <div class="flex flex-nowrap gap-[20px]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((s) => {
