@@ -104,11 +104,6 @@ export default function HomePage() {
       <div className="max-w-screen-lg m-auto my-4">
         <Faq content={AccordionContent} />
       </div>
-      <div className="bg-footerBg w-full mt-20">
-        <div className="max-w-[1150px] m-auto text-white px-10 py-28 xl:px-0">
-          <Footer />
-        </div>
-      </div>
     </div>
   );
 }

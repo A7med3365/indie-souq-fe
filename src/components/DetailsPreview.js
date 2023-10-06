@@ -1,13 +1,16 @@
 import React from 'react';
-import Rewards from '../components/Rewards';
 
-export default function () {
+export default function DetailsPreview({ images }) {
   return (
-    <div>
-      {/* <Rewards /> */}
-      <div class="flex flex-col bg-white m-auto p-auto w-[750px] relative">
+    <div className="w-full relative flex flex-col gap-[42px]">
+      <img
+        className="rounded-[54px] w-[1000px]"
+        alt="NextUI hero Image with delay"
+        src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+      />
+      <div class="flex flex-col bg-white w-[750px] relative">
         <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
-          <div class="flex flex-nowrap gap-[20px] lg:ml-40 md:ml-20 ml-10 ">
+          <div class="flex flex-nowrap gap-[20px]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((s) => {
               return (
                 <div key={s} class="inline-block">
