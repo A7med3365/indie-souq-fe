@@ -23,7 +23,9 @@ export default function Navbar() {
         justify="center"
       >
         <NavbarItem isSelected={true}>
-          <Link className="text-gray1 text-xl">Films</Link>
+          <Link className="text-gray1 text-xl" href="/films">
+            Films
+          </Link>
         </NavbarItem>
         <NavbarItem>
           <Link className="text-gray1 text-xl" href="/creators">

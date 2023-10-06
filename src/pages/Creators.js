@@ -1,8 +1,10 @@
 import React from 'react';
 import Search from '../components/Search';
 import Creator from '../components/Creator';
+import { useNavigate } from 'react-router-dom';
 
 export default function Creators() {
+  const navigate = useNavigate();
   let creators = [
     {
       name: 'Oliver Anderson',
@@ -92,7 +94,14 @@ export default function Creators() {
       </div>
       <div className="grid grid-cols-4 gap-x-[20px] gap-y-[36px] max-w-[1140px] m-auto pb-[70px]">
         {creators.map((creator) => {
-          return <Creator creator={creator} />;
+          return (
+            <Creator
+              creator={creator}
+              onClick={() => {
+                navigate('/profile');
+              }}
+            />
+          );
         })}
       </div>
     </div>
