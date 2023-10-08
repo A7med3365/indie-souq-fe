@@ -4,29 +4,42 @@ import { Modal, ModalContent, ModalBody } from '@nextui-org/react';
 export default function Rewards({ isOpen, onOpenChange }) {
   return (
     <div>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        backdrop="blur"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        size="full"
+        classNames={{
+          body: 'py-6',
+          // backdrop: "bg-[#292f46]/50 backdrop-opacity-40",
+          base: 'bg-[rgb(0,0,0,0)] shadow-none text-white w-[1440px]',
+          // header: "border-b-[1px] border-[#292f46]",
+          // footer: "border-t-[1px] border-[#292f46]",
+          closeButton:
+            'hover:bg-[#ff0000]/50 text-white text-5xl active:bg-white/10',
+        }}
+      >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <div className="flex justify-between my-auto mx-4">
+                  {[
+                    [
+                      'w-[350px] h-[650px] border-[10px] border-[#805400] rounded-[59px] absolute opacity-0 transition hover:scale-x-[1.15] hover:scale-y-[1.08] hover:opacity-100',
+                      'w-[350px] h-[650px] border-[10px] border-[#CFCFCF] rounded-[59px] absolute opacity-0 transition hover:scale-x-[1.15] hover:scale-y-[1.08] hover:opacity-100',
+                      'w-[350px] h-[650px] border-[10px] border-[#FfA200] rounded-[59px] absolute opacity-0 transition hover:scale-x-[1.15] hover:scale-y-[1.08] hover:opacity-100',
+                    ].map((style) => {
+                      return (
+                        <div className="w-[350px] h-[650px] relative">
+                          <div className="w-[350px] h-[650px] bg-white rounded-[59px] absolute"></div>
+                          <div className={style}></div>
+                        </div>
+                      );
+                    }),
+                  ]}
+                </div>
               </ModalBody>
             </>
           )}
