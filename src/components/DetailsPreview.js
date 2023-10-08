@@ -41,6 +41,7 @@ export default function DetailsPreview() {
                 </div>
               );
             })}
+            <div className="h-full w-[158px]"></div>
           </div>
         </div>
         <div className="h-full w-[158px] absolute right-0 bg-gradient-to-l from-white"></div>

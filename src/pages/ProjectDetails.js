@@ -18,8 +18,8 @@ export default function ProjectDetails() {
     rewards: 'Available',
   };
   return (
-    <div className="max-w-[1440px] m-auto gap-[55px] mt-5 flex justify-between">
-      <div className="flex flex-col gap-[62px] grow max-w-[960px]">
+    <div className="max-w-[1440px] m-auto gap-[55px] mt-5 flex justify-center">
+      <div className="flex flex-col gap-[62px] max-w-[753px]">
         <DetailsPreview />
         <DetailsTaps />
       </div>
