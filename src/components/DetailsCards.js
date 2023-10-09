@@ -68,17 +68,17 @@ export default function DetailsCards({ data }) {
             </div>
             <div className="mb-[27px]">
               <div className="text-[18px] text-[#656565] leading-[22px] font-medium flex justify-between">
-                <div>Bronze Tier</div>
+                <div>Film Enthusiast</div>
                 <div className="font-semibold">20 BD</div>
               </div>
               <div className="w-full border-[1px] border-orange my-[13px]"></div>
               <div className="text-[18px] text-[#656565] leading-[22px] font-medium flex justify-between">
-                <div>Silver Tier</div>
+                <div>Producer's Circle</div>
                 <div className="font-semibold">100 BD</div>
               </div>
               <div className="w-full border-[1px] border-orange my-[13px]"></div>
               <div className="text-[18px] text-[#656565] leading-[22px] font-medium flex justify-between">
-                <div>Golden Tier</div>
+                <div>Executive Producer</div>
                 <div className="font-semibold">1000 BD</div>
               </div>
             </div>

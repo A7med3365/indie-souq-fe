@@ -22,7 +22,7 @@ export default function Test() {
         </div>
         <div className="h-full w-[158px] absolute right-0 bg-gradient-to-l from-white"></div>
       </div> */}
-      <div className="m-auto mt-10 w-[90%] h-[200px] rounded-[5rem] overflow-hidden flex gap-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+      {/* <div className="m-auto mt-10 w-[90%] h-[200px] rounded-[5rem] overflow-hidden flex gap-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
         <div className="m-auto grow h-[90%] bg-[#FF0000] rounded-[5rem] overflow-hidden flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-[1.15] duration-300"></div>
         <div className="m-auto grow h-[90%] bg-[#725CFF] rounded-[5rem] overflow-hidden flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-[1.15] duration-300"></div>
         <div className="m-auto grow h-[90%] bg-[#5CCFFF] rounded-[5rem] overflow-hidden flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-[1.15] duration-300"></div>
@@ -45,6 +45,37 @@ export default function Test() {
         <div className="m-auto grow h-[90%] bg-[#F0FF5C] rounded-[5rem] overflow-hidden flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-[1.15] duration-300"></div>
         <div className="m-auto grow h-[90%] bg-[#725CFF] rounded-[5rem] overflow-hidden flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-[1.15] duration-300"></div>
         <div className="m-auto grow h-[90%] bg-[#FFD45C] rounded-[5rem] overflow-hidden flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-[1.15] duration-300"></div>
+      </div> */}
+      <div className="flex justify-end">
+        <div
+          type="search"
+          label="Search"
+          placeholder="Search..."
+          className="h-[75px] bg-[#F5F5F5] rounded-[48px] w-[75px] placeholder:text-[rgb(0,0,0,0)] px-[30px] text-[24px] leading-[29px] font-normal py-auto text-gray2 focus:outline-none transition-all duration-500 transform focus:w-[523px] focus:placeholder:text-[#D1D1D1]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="41"
+            height="41"
+            viewBox="0 0 41 41"
+            fill="none"
+          >
+            <circle
+              cx="18.1866"
+              cy="18.107"
+              r="15.6383"
+              stroke="#8B8B8B"
+              stroke-width="3.19149"
+            />
+            <path
+              d="M29.3569 29.5957L38.6123 38.5319"
+              stroke="#8B8B8B"
+              stroke-width="3.19149"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   );

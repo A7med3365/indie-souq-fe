@@ -15,7 +15,7 @@ export default function ProjectDetails() {
     fundPurpose: 'Cast Cost',
     Deadline: '11 Nov 2023',
     type: 'Fixed Fund',
-    rewards: 'Available',
+    rewards: 'Fixed',
   };
   return (
     <div className="max-w-[1440px] m-auto gap-[55px] mt-5 flex justify-center">
