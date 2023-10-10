@@ -7,7 +7,7 @@ export default function SelectedCreators({ creators }) {
         return (
           <div className="flex flex-col gap-4">
             <img
-              className="rounded-[4rem]"
+              className="rounded-[59px] w-[270px] h-[304px] object-cover"
               src={creator.image}
               alt={creator.name}
             />
