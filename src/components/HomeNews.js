@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function () {
+export default function HomeNews() {
   return (
     <div className="w-[935px] h-[692px] grid grid-rows-9 grid-flow-row gap-[26px] m-auto">
       <div className="bg-gray1 rounded-[18px] col-start-1 col-span-2 row-start-1 row-end-7"></div>
