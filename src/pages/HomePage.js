@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from '../components/Carousel';
+import HeroSection from '../components/HeroSection';
 import TrendCard from '../components/TrendCard';
 import SelectedCreators from '../components/SelectedCreators';
 import SepLine from '../components/SepLine';
@@ -13,34 +13,80 @@ import { useNavigate } from 'react-router-dom';
 export default function HomePage() {
   const navigate = useNavigate();
   let slides = [
-    './banner-sample.png',
-    './banner-sample.png',
-    './banner-sample.png',
+    {
+      image: './slide1.png',
+      content: {
+        title: 'The Skeleton Whale',
+        subtitle: 'Feature Film',
+        description:
+          'When Mariam discovers a talking skeleton whale, she must journey across a desolate Arabia with her companions to save the Whale, her home and everyone in it',
+        tags: ['Animation', 'Sci-Fi', 'Action'],
+      },
+    },
+    {
+      image: './slide2.png',
+      content: {
+        title: 'Small Dream',
+        subtitle: 'Short Film',
+        description:
+          'Living in Ras Al Khaimah, UAE, a conservative society, Maitha has a small and seemingly simple dream of swimming in the sea that she frequents.',
+        tags: ['Drama', 'Emotional'],
+      },
+    },
+    {
+      image: './slide3.png',
+      content: {
+        title: 'Spinster',
+        subtitle: 'Feature Film',
+        description:
+          'As an Emirati woman pushes 30, her family pressures her to settle down. Torn between two choices, Amal must marry to satisfy her family or stand alone.',
+        tags: ['Drama', 'Emotional'],
+      },
+    },
+    {
+      image: './slide4.png',
+      content: {
+        title: 'How to Not Get Married',
+        subtitle: 'Feature Film',
+        description:
+          'When Shahad, a niqabi and aspiring stand-up comedian, falls for her mentor, she learns love and marriage are more complex than her jokes portray.',
+        tags: ['Comedy', 'Romantic comedy'],
+      },
+    },
+    {
+      image: './slide5.png',
+      content: {
+        title: 'Reimagine entertainment Invest in new content',
+        subtitle: '',
+        description: '',
+        tags: [],
+      },
+    },
   ];
   let creators = [
     {
-      name: 'Ali Alnajjar',
-      role: 'Film Director',
+      name: 'Sarra Alshehhi',
+      role: 'Director',
       image:
-        'https://s3-alpha-sig.figma.com/img/d823/55ae/fcdea021324bfe7bbcff48925da880d2?Expires=1698019200&Signature=aDBUKSXubmJ5Z~s2y1tnf~vHiANbVCG~dzxLbVQaoqhhc0ZIxjKQa0egiX4qOa7JZAoehhANIaOIDEPjg8WXN9asYfFF56JJ5m6AVMVLXFnV95qC5BLMi2HDUsZHnzghtY59EZIgZG~ubwuEZxLDFFnnQjgjqbFL9V-7WPvgJUjVkKNqa2olvBz9GyQNVqrUCD0Qitt2TMhM-6Fe~fogQ3PQCd0ceOdjqvPXHWiFe~iqqkIyHpYW4cmZ69jeAPCAMtBlfvEeOawo3C5MNTM8nn3a9XK6cpUXxXojpbHkoAJcX2gh1OTBkBhtv~YqtB0-bTP39-h3I3tvVtI~7qoOlw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        'https://s3-alpha-sig.figma.com/img/e26c/2905/aab29afb825e367af32e5b72498089a9?Expires=1698624000&Signature=LJMTwt8wlT6LiyNfGEDW8t-CIfsSfK4x3s96WRvzXbdkYjza3-6lashN5o3CIfM5LOU4TLLwaOVd5KNv~TU4R~XNV8GIlNj0ZsrCAJLV42H6wY~p~99gSLG2k2x41-0XW8C-kgX5GRmAmf0Of9bPm79oynuF4IGN2PoA9Q2FJVnNQcNIy7-AmM4N8f-YJ1HuBOFe1vDOJQINWHqQpjDTCDdXuZ-OdAan3LBn0l3kCAR9ucxV58gf4udbyA0mrVn-utGyy~TY87KtiuSEx6nMEak6JedL3t0CdR8e8JNgYeLwYXMv3j~tmhGl8~UgzIP358XvJip027FtXhmpEuxNgQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
     },
     {
-      name: 'Ahmed Sharif',
-      role: 'Film Producer',
+      name: 'Abdulrahman Almadani',
+      role: 'Director',
       image:
-        'https://s3-alpha-sig.figma.com/img/84fe/8d78/ac4191f087dbcdb8045605105a41521b?Expires=1698019200&Signature=Akrdv8qX0QkyuDaqTd9XwXRPhDaLhUq1jY2NMmmhMy7C1Oxwq1kYwZIJWJZqaiEv0ne73kx-flMQMPj3G9g1HV6Hrj0lJTbr5ybqp2wQGg8UJB~2OQz3aYMMe9tSq46Caj78oWEfdZ51mjtnpSHZFH53MymNJ15roOpaQ9E1PsM8t5SdY6XnTmyKcTPJzS0VdaiBFXgy0jrEtBS84oJ8C3dJ6xHMnL2loc59nGNOR1yADX3pJay6KEhrIUbdsG0SjwuGuRXfZvHONlWLac7UXTRY7ugd7Ztf~UgERpv-8UNP7tm1ci5hIUMyftUvNSXeCYUOD3Mb52E9g08B9RU4zg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        'https://s3-alpha-sig.figma.com/img/3d50/ccc4/72e06555ecdaddf6d13407da182e0457?Expires=1698624000&Signature=I3DFu2DYnHwcujLg3OjQgyySp~KAn-5V5hQg2iPLU-BGaLBDlhh-jqp2DpklC0IFW4nQnnblJMK3Zv-JOzzmnLqzwcGHQXWb45jleMBdiMRL6sYKPRi-ZTp--e0MvbSNeWzHFqkt~JkWiaNzw7USA9RWT3LEREDfGqfrJzfQYtSNYAmPT-idsdlf1cXvITKrkV4qZCvB1EXy1AmAhk4NZEHdJOKTjJRa5NnZlgce3uKgP9ZjM1apmRA3CEN~cUBhs55Tk~LoUsU0hFCl1T-sG3SIALFf7~JutKoiqU6JWfQ5OfS2EyKvySBBSEW0~FmszTjVZ1cjijSSjElETNTDcg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
     },
     {
-      name: 'Sami Rashdan',
-      role: 'Film Producer',
+      name: 'Hala Matar',
+      role: 'Director',
       image:
-        'https://s3-alpha-sig.figma.com/img/821d/1d04/7f6d58a748ffa632159944311cbbba65?Expires=1698019200&Signature=fOz0xTVjqxHNAzUFm-gIiExNzsmgN3aaOhUdKC3FI91uBVjzPwlG~5JDdhyclOiQ9uRHMN~P0sOxhbYhVpRb18w3-VZhF2M9ylBeBEqL1nBpku6dhxwUk7zQ9Cf-E2qX9C6J2PIdgWKZyFbN0o7gyE0VcI2XHg4ytTDQ1QbO0r4r4udWXSplLcQ~tIo5DPq89jK64m2yPN3P3HnpQP0RRUFLqYXq7hD7Wq6zKMiv~2M6w2KF3ow5wgDHvKYjTKu~GP~c~cgtVLsMHGuJDnyw-IZ5z4tLtvyukPlTLayLQ3cpDFYlDmnqY1vPx5n8s2GtamIKk3QoFYPPsZAREMYoiw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        'https://s3-alpha-sig.figma.com/img/c5ab/e0f9/259a25d0f0b90920286523d80a55ace8?Expires=1698624000&Signature=nDJrRkGdB~xu0EpQQ35nXFHrhRtWt6WiqwdUK~DxRDhZZ6PqdqlTiqAAb~zlgLPS23p6tfHmVvX4Ris5oN7iIWpKEAWqgsKj4~MQDRWQ-b5elMQgd~rIxdrX9pMaQhSANfIeTZ9UVhLklN309SQMCHeT8zPtxcT0nkLUj3jN9sTWNoVqROnyAQOsQmFm-GIsksgqE-XAuXF974K5OUPLAUCNQUy1Gdic0VRE-ebxdTTJpa2xZLsZRw2DheJmMuk8~EQX2Jovc0nZxYq1GihmXjO5vB8wusI0RRdSeE4YwwG96v-2u7gmLK~yfoUJ6J01LNH5d1TMYuUKmdb~tFGPAw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
     },
     {
-      name: 'Khaled Janahi',
-      role: 'Actor',
+      name: 'Eman Alsabah',
+      role: 'Screenwriter',
       image:
-        'https://s3-alpha-sig.figma.com/img/4277/6a70/d28e0713e0af57da6ed45a2292e9c76a?Expires=1698019200&Signature=E4buKSdXm6~37ghO9elS08XkSNLUnwWI7mEI-C~MO7K1q~tF1eLV8ztEDba9~UbQEASAUEsrfmjEOl~P3oKJ1FLHzfk9~7nj07bV-W8M-RkCV971OhWdysX3HuFLM6oS0vLIhKJHSedvIGqWwo4XYwXLHU8-an0IInW5p-hOlyjTrUf-GMazwFFzhFDNonh7cTr8Ly9cbHsy6YGSnAS7SlgA1XL8EV3rSGeOrq2Q5pUs2DQC1iglfnjv-2h4rIRQHKD5WzVEx1-UpXVcwWDuAWcS2PNIrzKk4Sbw7SHDyJ-Hz6o~oI-m1NS3UkJtLf9f5SHx0yEeY~besuGvmgMj0A__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        'https://s3-alpha-sig.figma.com/img/c5ca/141f/b9dbb96c8367255e016576298b0f644a?Expires=1698624000&Signature=SRVIiOo5zZK0L8I~aR-VD0Zpe~kyzWBagSeffg5~8wmZuJB6sMUUbVUS8ciOgpgPYxpfwU9HuGHxGDPhXBlcnsRR7UyNco3ZmFwn9eGrGaShQTZl4v8lS--Cj-LaG-8YgGkPjoNvFhFyFpeZXZuBo6xcwanQQYdBL4g2eN4zDkzS7gHr4DNp~2~4iEuBDjfRBTN4ojJb~VyQPvckWs2xcsRCwT2VZ3CISP3C6t9yBXQupQkTSnKC4~Y1j1Q7HSKIVBXifpkOMecAYZBt79mTsV1wQ4b5aHmmakSO5QRQAz6-LfNu8TyrutDYJybqx7fM3gRFjws4A7lGoazPUZHzfg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
     },
   ];
   const defaultContent =
@@ -67,11 +113,11 @@ export default function HomePage() {
   let trending = [
     {
       BgImg:
-        'https://s3-alpha-sig.figma.com/img/69c4/6289/d851020acab2051ccbf43d558bf40678?Expires=1698019200&Signature=dVv63wK060hrvaFS2ZPO66Bgu0gQCSDLqyfhc~5h9o5P8b0iHis2COvxOk-EJ7t3TYCq1vFx8C~qBZ~LqQXvcjAbmLDUvBikOVq-nVvhgl-huGz3uglDD~LeRFCoaJKqJfOntnbrdAX7YUL7b-ibnZWeFAvB0OPa5G~zQOs0WtPZtaQ-29w0XfNlv4nIKwU5KKEu4gQrH0s10K3ytGRH1p4diVECiY49t3C8QrxDMhxWAMEsYbLv9B4wZV18yQA5cvlVbNFIe-HGSVmQaUcX0EmPc3WwD9GnkeqgCBn8gOyavxrpMDAbITmlmzq7T1GeWTEjTTd-ue0NV5ll0bn17A__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        'https://s3-alpha-sig.figma.com/img/42bd/e6f1/ee943b12e6970b21fbe8ed50c3af6db4?Expires=1698624000&Signature=cl4PQh4WtEWJeN5s0Ddq-T47ahNGbs~EGsiDpF7A-fSi0CHMfNm-sCZW1ZgkLH-6qpJ~I48Au6EWc8px~FU7PKg9X5Wf6hcmM6hUanyUDEHFYnWaxfR04KHq111mKOIbO65gTTmYBbQzcQFPtx~i8IGrIFFwfIkEbkKCI42uTh7L1UNQDJztXrUwKFVBsUg~8lJQPFbS0JLWS-gS4hEsOG~40s~EihnlDmZrZp3pi52Ba3lhtEYWoEMKUI5w8DpSw5DtymaFPYY~U7Mkt52rLFFKRAqBEb~G6wm36WedIhc-HMPpFc1rucKQMm3By09wmBCV7Ooh5IXtWOvYcqYgxw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       percentage: 88,
       label: 'Trending Now',
-      title: 'Movie Name',
-      by: 'Mohamed Jasim',
+      title: 'a Small Dream',
+      by: 'Sarra’a Alshehhi',
     },
     {
       BgImg:
@@ -116,7 +162,14 @@ export default function HomePage() {
   return (
     <div className="relative">
       <div className="max-w-[1440px] m-auto">
-        <Carousel slides={slides} />
+        <div className="w-full h-[113px] p-2.5 bg-white justify-center items-center gap-[38px] inline-flex">
+          <div className="text-orange text-3xl font-normal leading-7">
+            Reimagine entertainment. Invest in new content.
+          </div>
+        </div>
+      </div>
+      <div className="max-w-[1440px] m-auto">
+        <HeroSection slides={slides} />
       </div>
       <div className="my-[48px]">
         <HomeSection
