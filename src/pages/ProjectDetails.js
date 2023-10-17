@@ -2,6 +2,7 @@ import React from 'react';
 import DetailsCards from '../components/DetailsCards';
 import DetailsTaps from '../components/DetailsTaps';
 import DetailsPreview from '../components/DetailsPreview';
+import DetailsReactions from '../components/DetailsReactions';
 
 export default function ProjectDetails() {
   let exampleData = {
@@ -21,6 +22,7 @@ export default function ProjectDetails() {
     <div className="max-w-[1440px] m-auto gap-[55px] mt-5 flex justify-center">
       <div className="flex flex-col gap-[62px] max-w-[753px]">
         <DetailsPreview />
+        <DetailsReactions />
         <DetailsTaps />
       </div>
       <DetailsCards data={exampleData} />
