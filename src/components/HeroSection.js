@@ -17,7 +17,7 @@ export default function HeroSection({ slides }) {
     }, 4000);
 
     return () => clearInterval(intervalId);
-  }, [current]);
+  }, [current, slides.length]);
   return (
     <div class="flex overflow-hidden pb-10 hide-scroll-bar w-[1440px] h-[622px] relative">
       <div

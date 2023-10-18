@@ -346,9 +346,11 @@ export const Icon4 = () => (
   </svg>
 );
 
-export default {
+const HomeIcons = {
   Icon1,
   Icon2,
   Icon3,
   Icon4,
 };
+
+export default HomeIcons;
