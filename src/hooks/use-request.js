@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 export default function useRequest({ url, method, body, onSuccess }) {
   const [errors, setErrors] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const [isSuccess, setSuccess] = useState(false);
 
   const doRequest = async (props = {}) => {
     try {
@@ -14,8 +16,12 @@ export default function useRequest({ url, method, body, onSuccess }) {
         {
           ...body,
           ...props,
+        },
+        {
+          withCredentials: true,
         }
       );
+      setSuccess(true);
       if (onSuccess) {
         await onSuccess(response);
       }
@@ -23,8 +29,10 @@ export default function useRequest({ url, method, body, onSuccess }) {
     } catch (err) {
       console.log(err.response.data.errors);
       setErrors(err.response.data.errors);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { doRequest, errors };
+  return { doRequest, isLoading, isSuccess, errors };
 }

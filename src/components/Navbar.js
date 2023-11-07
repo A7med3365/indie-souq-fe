@@ -6,10 +6,11 @@ import {
   NavbarItem,
   Link,
   Button,
+  Spinner,
 } from '@nextui-org/react';
 import useRequest from '../hooks/use-request';
 
-export default function Navbar({ currentUser, isAuth }) {
+export default function Navbar({ currentUser, isAuth, isLoading }) {
   const [user, setUser] = React.useState(null);
   const { doRequest, errors } = useRequest({
     method: 'get',
@@ -95,7 +96,7 @@ export default function Navbar({ currentUser, isAuth }) {
             className="text-gray1 text-base font-semibold p-[10px]"
             href="/signin"
           >
-            {isAuth ? 'logout' : 'login'}
+            {isLoading ? <Spinner label="" size="sm" /> : isAuth}
           </Link>
         </NavbarItem>
       </NavbarContent>

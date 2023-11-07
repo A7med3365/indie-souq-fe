@@ -9,7 +9,7 @@ import useRequest from '../hooks/use-request';
 export default function Creators() {
   const navigate = useNavigate();
   const [creators, setCreators] = React.useState([]);
-  const { doRequest, errors } = useRequest({
+  const { doRequest, isLoading, isSuccess, errors } = useRequest({
     url: '/api/users',
     method: 'get',
     onSuccess: (res) => {
@@ -26,7 +26,7 @@ export default function Creators() {
     fetch();
   }, []);
 
-  if (creators.length < 1) {
+  if (isLoading) {
     return (
       <div className="flex justify-center my-[88px]">
         <Spinner label="Loading..." size="lg" />

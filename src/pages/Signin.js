@@ -2,10 +2,22 @@ import { Button, Input, Link } from '@nextui-org/react';
 import React from 'react';
 import { EyeFilledIcon } from '../components/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../components/EyeSlashFilledIcon';
+import { useNavigate } from 'react-router-dom';
+import useRequest from '../hooks/use-request';
 
 export default function Signin() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [data, setData] = React.useState({ email: '', password: '' });
+  const nav = useNavigate();
+  const { doRequest, isLoading, isSuccess, errors } = useRequest({
+    url: '/api/users/signin',
+    method: 'post',
+    body: { ...data },
+    onSuccess: (res) => {
+      console.log(res);
+      nav('/');
+    },
+  });
 
   React.useEffect(() => {
     console.log(data);
@@ -51,6 +63,9 @@ export default function Signin() {
       <Button
         size="lg"
         className="bg-orange text-white text-lg font-semibold mt-4"
+        onClick={async () => {
+          doRequest();
+        }}
       >
         Sign in
       </Button>

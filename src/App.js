@@ -20,31 +20,33 @@ import { useEffect } from 'react';
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const { doRequest, errors } = useRequest({
+  const { doRequest, isLoading, isSuccess, errors } = useRequest({
     url: '/api/users/currentuser',
     method: 'get',
+    onSuccess: (res) => {
+      if (res.data.currentUser) {
+        setCurrentUser(res.data.currentUser);
+        setIsAuth(true);
+        console.log(res.data);
+      } else {
+        setCurrentUser(null);
+        setIsAuth(false);
+      }
+    },
   });
+  const fetch = async () => {
+    await doRequest();
+  };
   useEffect(async () => {
     // console.log('REACT_APP_BACKEND_URL:', backendUrl);
     if (!process.env.REACT_APP_BACKEND_URL) {
       console.log('backend url must be defined');
     }
-    // await doRequest({
-    //   onSuccess: (res) => {
-    //     if (res.data.currentUser) {
-    //       setCurrentUser(res.data.currentUser);
-    //       setIsAuth(true);
-    //       console.log(res.data);
-    //     } else {
-    //       setCurrentUser(null);
-    //       setIsAuth(false);
-    //     }
-    //   },
-    // });
+    fetch();
   }, []);
   return (
     <div>
-      <Navbar currentUser={currentUser} isAuth={isAuth} />
+      <Navbar currentUser={currentUser} isAuth={isAuth} isLoading={isLoading} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/films" element={<Films />} />
