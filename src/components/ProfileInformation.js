@@ -1,21 +1,19 @@
 import React from 'react';
 import { Button } from '@nextui-org/react';
 
-export default function ProfileInformation() {
+export default function ProfileInformation({ user }) {
   return (
     <div>
       <div className="flex justify-between gap-[94px] mb-[23px]">
         <div className="grow">
           <p className="text-[32px] leading[39px] font-bold text-black mb-[16px]">
-            FirstName LastName
+            {`${user.firstName} ${user.lastName}`}
           </p>
           <p className="text-[24px] leading[29px] font-medium text-[#BFBFBF] mb-[23px]">
             Film Maker | Bahrain
           </p>
           <p className="text-[24px] leading-[29px] font-normal text-black ">
-            Lorem ipsum dolor sit amet consectetur. Nisi fringilla scelerisque
-            sem etiam fusce sed lectus scelerisque consectetur Dictum sagittis
-            interdum onsectetur.
+            {user.bio}
           </p>
         </div>
         <div className="w-[438px]">
@@ -46,10 +44,16 @@ export default function ProfileInformation() {
             </div>
           </div>
           <div className="flex gap-[32px] justify-center">
-            <Button className="w-[203px] py-[13px] px-[30px] rounded-[23px] bg-orange text-white font-bold text-[24px] leading-[29px] cursor-pointer">
+            <Button
+              isDisabled
+              className="w-[203px] py-[13px] px-[30px] rounded-[23px] bg-orange text-white font-bold text-[24px] leading-[29px] cursor-pointer"
+            >
               Follow
             </Button>
-            <Button className="w-[203px] py-[13px] px-[30px] rounded-[23px] bg-white text-orange font-bold text-[24px] leading-[29px] cursor-pointer border-[2px] border-orange">
+            <Button
+              isDisabled
+              className="w-[203px] py-[13px] px-[30px] rounded-[23px] bg-white text-orange font-bold text-[24px] leading-[29px] cursor-pointer border-[2px] border-orange"
+            >
               Message
             </Button>
           </div>

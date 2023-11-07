@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeroSection from '../components/HeroSection';
 import TrendCard from '../components/TrendCard';
 import SelectedCreators from '../components/SelectedCreators';
@@ -12,8 +12,11 @@ import { useNavigate } from 'react-router-dom';
 import HomeHowItWorks from '../components/HomeHowItWorks';
 import ScrollButton from '../components/ScrollButton';
 
-export default function HomePage() {
+import useRequest from '../hooks/use-request';
+
+export default function HomePage({ setCurrentUser }) {
   const navigate = useNavigate();
+
   let slides = [
     {
       image: './slide1.png',
