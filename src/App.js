@@ -20,7 +20,7 @@ import { useEffect } from 'react';
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const { doRequest, isLoading, isSuccess, errors } = useRequest({
+  const { doRequest, isLoading } = useRequest({
     url: '/api/users/currentuser',
     method: 'get',
     onSuccess: (res) => {
@@ -37,13 +37,13 @@ export default function App() {
   const fetch = async () => {
     await doRequest();
   };
-  useEffect(async () => {
+  useEffect(() => {
     // console.log('REACT_APP_BACKEND_URL:', backendUrl);
     if (!process.env.REACT_APP_BACKEND_URL) {
       console.log('backend url must be defined');
     }
     fetch();
-  }, []);
+  });
   return (
     <div>
       <Navbar currentUser={currentUser} isAuth={isAuth} isLoading={isLoading} />

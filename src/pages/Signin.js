@@ -9,7 +9,7 @@ export default function Signin() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [data, setData] = React.useState({ email: '', password: '' });
   const nav = useNavigate();
-  const { doRequest, isLoading, isSuccess, errors } = useRequest({
+  const { doRequest } = useRequest({
     url: '/api/users/signin',
     method: 'post',
     body: { ...data },

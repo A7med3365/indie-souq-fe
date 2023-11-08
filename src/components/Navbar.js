@@ -8,26 +8,8 @@ import {
   Button,
   Spinner,
 } from '@nextui-org/react';
-import useRequest from '../hooks/use-request';
 
 export default function Navbar({ currentUser, isAuth, isLoading }) {
-  const [user, setUser] = React.useState(null);
-  const { doRequest, errors } = useRequest({
-    method: 'get',
-  });
-  React.useEffect(async () => {
-    console.log('nav');
-    console.log(currentUser);
-    if (isAuth) {
-      await doRequest({
-        url: `/api/users/${currentUser.id}`,
-        onSuccess: (res) => {
-          setUser(res.data);
-          console.log(res.data);
-        },
-      });
-    }
-  }, [isAuth]);
   return (
     <Nav maxWidth="2xl" className="px-5 2xl:px-0" isBlurred>
       <NavbarContent justify="start">
@@ -96,7 +78,7 @@ export default function Navbar({ currentUser, isAuth, isLoading }) {
             className="text-gray1 text-base font-semibold p-[10px]"
             href="/signin"
           >
-            {isLoading ? <Spinner label="" size="sm" /> : isAuth}
+            {isLoading ? <Spinner label="" size="sm" /> : 'login'}
           </Link>
         </NavbarItem>
       </NavbarContent>

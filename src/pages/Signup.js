@@ -2,7 +2,6 @@ import { Button } from '@nextui-org/react';
 import React from 'react';
 import Step1 from '../components/signup/Step1';
 import Step2 from '../components/signup/Step2';
-import axios from 'axios';
 import useRequest from '../hooks/use-request';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +22,7 @@ export default function Signup() {
     bio: 'Lorem ipsum dolor sit amet consectetur. Nisi fringilla scelerisque sem etiam fusce sed lectus scelerisque consectetur Dictum sagittis interdum onsectetur.',
   });
 
-  const { doRequest: step1, errors: err1 } = useRequest({
+  const { doRequest: step1 } = useRequest({
     url: '/api/users/signup',
     method: 'post',
     body: { ...data },
@@ -32,7 +31,7 @@ export default function Signup() {
       setStep(step + 1);
     },
   });
-  const { doRequest: step2, errors: err2 } = useRequest({
+  const { doRequest: step2 } = useRequest({
     url: `/api/users/${userId}`,
     method: 'put',
     body: { ...data2 },

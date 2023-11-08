@@ -22,7 +22,7 @@ export default function Profile() {
   };
   React.useEffect(() => {
     fetchUserData();
-  }, []);
+  });
   React.useEffect(() => {
     console.log(userId);
   }, [userId]);

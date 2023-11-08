@@ -9,7 +9,7 @@ import useRequest from '../hooks/use-request';
 export default function Creators() {
   const navigate = useNavigate();
   const [creators, setCreators] = React.useState([]);
-  const { doRequest, isLoading, isSuccess, errors } = useRequest({
+  const { doRequest, isLoading } = useRequest({
     url: '/api/users',
     method: 'get',
     onSuccess: (res) => {
@@ -24,7 +24,7 @@ export default function Creators() {
 
   React.useEffect(() => {
     fetch();
-  }, []);
+  });
 
   if (isLoading) {
     return (
