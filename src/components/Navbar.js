@@ -8,8 +8,9 @@ import {
   Button,
   Spinner,
 } from '@nextui-org/react';
+import NavbarAvatar from './NavbarAvatar';
 
-export default function Navbar({ currentUser, isAuth, isLoading }) {
+export default function Navbar({ userId, isAuth, logout }) {
   return (
     <Nav maxWidth="2xl" className="px-5 2xl:px-0" isBlurred>
       <NavbarContent justify="start">
@@ -74,12 +75,16 @@ export default function Navbar({ currentUser, isAuth, isLoading }) {
           </Button>
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">
-          <Link
-            className="text-gray1 text-base font-semibold p-[10px]"
-            href="/signin"
-          >
-            {isLoading ? <Spinner label="" size="sm" /> : 'login'}
-          </Link>
+          {isAuth ? (
+            <NavbarAvatar userId={userId} logout={logout} />
+          ) : (
+            <Link
+              className="text-gray1 text-base font-semibold p-[10px]"
+              href="/signin"
+            >
+              login
+            </Link>
+          )}
         </NavbarItem>
       </NavbarContent>
     </Nav>

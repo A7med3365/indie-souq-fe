@@ -21,21 +21,35 @@ import { useCallback } from 'react';
 export default function App() {
   const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [userId, setUserId] = useState(null);
   const { doRequest, isLoading } = useRequest({
     url: '/api/users/currentuser',
     method: 'get',
     onSuccess: (res) => {
       if (res.data.currentUser) {
-        setCurrentUser(res.data.currentUser);
+        setUserId(res.data.currentUser.id);
         setIsAuth(true);
         // console.log(res.data);
       } else {
-        setCurrentUser(null);
+        setUserId(null);
         setIsAuth(false);
       }
     },
   });
+
+  const { doRequest: doLogout } = useRequest({
+    url: '/api/users/signout',
+    method: 'get',
+    onSuccess: (res) => {
+      setIsAuth(false);
+      setUserId(null);
+    },
+  });
+
+  const logout = async () => {
+    await doLogout();
+  };
+
   const fetch = useCallback(async () => {
     await doRequest();
   }, [doRequest]);
@@ -47,9 +61,18 @@ export default function App() {
     }
     fetch();
   }, [location.pathname]);
+
+  useEffect(() => {
+    console.log(userId);
+  }, [userId]);
   return (
     <div>
-      <Navbar currentUser={currentUser} isAuth={isAuth} isLoading={isLoading} />
+      <Navbar
+        userId={userId}
+        isAuth={isAuth}
+        isLoading={isLoading}
+        logout={logout}
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/films" element={<Films />} />
