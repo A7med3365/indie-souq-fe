@@ -27,9 +27,12 @@ export default function HomeHowItWorks() {
   ];
   return (
     <div className="grid grid-cols-2 gap-[32px] h-[530px] max-w-[1140px] m-auto">
-      {HowItWorks.map((card) => {
+      {HowItWorks.map((card, i) => {
         return (
-          <div className="bg-[#F6F6F6] rounded-[27px] flex gap-[37px] justify-center items-center">
+          <div
+            className="bg-[#F6F6F6] rounded-[27px] flex gap-[37px] justify-center items-center"
+            key={i}
+          >
             <div className="w-[164px]">{card.figure}</div>
             <div className="flex flex-col justify-start items-start gap-[17.49px]">
               <div className="w-[259.40px] text-[#353535] text-2xl font-semibold">

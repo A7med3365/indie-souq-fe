@@ -17,8 +17,13 @@ export default function ProfileTabs() {
       >
         <Tab key="Projects" title="Projects">
           <div className="grid grid-cols-3 gap-x-[20px] gap-y-[36px] mt-[36px]">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map(() => {
-              return <div className="h-[200px] bg-gray1 rounded-[54px]"></div>;
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => {
+              return (
+                <div
+                  className="h-[200px] bg-gray1 rounded-[54px]"
+                  key={i}
+                ></div>
+              );
             })}
           </div>
         </Tab>

@@ -56,9 +56,9 @@ export default function ScrollButton() {
             <path
               d="M4.34412 23.2107L23.5 4.05484L42.6558 23.2107"
               stroke="white"
-              stroke-width="7.90558"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="7.90558"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>

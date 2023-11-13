@@ -23,7 +23,7 @@ export default function Navbar({ currentUser, isAuth, isLoading }) {
         className="hidden sm:flex gap-3 lg:gap-10"
         justify="center"
       >
-        <NavbarItem isSelected={true}>
+        <NavbarItem>
           <Link
             className="text-[#D8D8D8] text-base font-semibold p-2.5 hover:text-gray1"
             href="/films"

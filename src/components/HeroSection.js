@@ -13,22 +13,22 @@ export default function HeroSection({ slides }) {
       } else {
         setCurrent(current + 1);
       }
-      console.log(current);
+      // console.log(current);
     }, 4000);
 
     return () => clearInterval(intervalId);
   }, [current, slides.length]);
   return (
-    <div class="flex overflow-hidden pb-10 hide-scroll-bar w-[1440px] h-[622px] relative">
+    <div className="flex overflow-hidden pb-10 hide-scroll-bar w-[1440px] h-[622px] relative">
       <div
-        class="flex flex-nowrap transition ease-out duration-1000"
+        className="flex flex-nowrap transition ease-out duration-1000"
         style={{
           transform: `translateX(-${(current / slides.length) * 100}%)`,
         }}
       >
-        {slides.map((slide) => {
+        {slides.map((slide, i) => {
           return (
-            <div className="w-[1440px] h-[622px] relative">
+            <div className="w-[1440px] h-[622px] relative" key={i}>
               <img
                 className="w-[1440px] h-[622px] left-0 top-0 absolute"
                 alt="hero banner"
@@ -46,9 +46,12 @@ export default function HeroSection({ slides }) {
                   {slide.content.description}
                 </div>
                 <div className="flex gap-2">
-                  {slide.content.tags.map((tag) => {
+                  {slide.content.tags.map((tag, i) => {
                     return (
-                      <div className="my-[16px] px-[26px] py-2 rounded-[78px] border border-white text-center text-white text-base font-light">
+                      <div
+                        className="my-[16px] px-[26px] py-2 rounded-[78px] border border-white text-center text-white text-base font-light"
+                        key={i}
+                      >
                         {tag}
                       </div>
                     );
@@ -66,6 +69,7 @@ export default function HeroSection({ slides }) {
         {slides.map((_, i) => {
           return (
             <div
+              key={i}
               className={`h-2.5 rounded-[5px] cursor-pointer ${
                 i === current ? 'bg-orange w-[69px]' : 'bg-white w-[31px]'
               }`}

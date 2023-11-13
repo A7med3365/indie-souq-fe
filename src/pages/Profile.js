@@ -13,16 +13,16 @@ export default function Profile() {
     method: 'get',
     onSuccess: (res) => {
       setUser(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     },
   });
 
-  const fetchUserData = async () => {
-    await doRequest();
-  };
   React.useEffect(() => {
+    const fetchUserData = async () => {
+      await doRequest();
+    };
     fetchUserData();
-  });
+  }, []);
   React.useEffect(() => {
     console.log(userId);
   }, [userId]);

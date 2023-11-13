@@ -161,13 +161,14 @@ export default function HomePage({ setCurrentUser }) {
         />
       </div>
       <div className="w-[1250px] m-auto flex overflow-x-scroll hide-scroll-bar flex-nowrap gap-[24px] snap-mandatory snap-x">
-        {trending.map((card) => {
+        {trending.map((card, i) => {
           return (
             <div
               className="inline-block snap-center cursor-pointer"
               onClick={() => {
                 navigate('/details');
               }}
+              key={i}
             >
               <div className="relative w-[560px]">
                 <TrendCard content={card} />

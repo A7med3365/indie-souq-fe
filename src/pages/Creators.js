@@ -3,35 +3,37 @@ import Search from '../components/Search';
 import Creator from '../components/Creator';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '@nextui-org/react';
-
 import useRequest from '../hooks/use-request';
 
 export default function Creators() {
   const navigate = useNavigate();
   const [creators, setCreators] = React.useState([]);
-  const { doRequest, isLoading } = useRequest({
+  const { doRequest, isLoading, errors } = useRequest({
     url: '/api/users',
     method: 'get',
     onSuccess: (res) => {
       setCreators(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     },
   });
 
-  const fetch = async () => {
-    await doRequest();
-  };
-
   React.useEffect(() => {
-    fetch();
-  });
+    const fetchCreatorsData = async () => {
+      await doRequest();
+    };
+    fetchCreatorsData();
+  }, []);
 
-  if (isLoading) {
+  if (isLoading || creators.length == 0) {
     return (
       <div className="flex justify-center my-[88px]">
         <Spinner label="Loading..." size="lg" />
       </div>
     );
+  }
+
+  if (errors) {
+    return <div>errors</div>;
   }
 
   return (
@@ -40,9 +42,10 @@ export default function Creators() {
         <Search />
       </div>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-[20px] gap-y-[36px] max-w-[1140px] m-auto pb-[70px]">
-        {creators.map((creator) => {
+        {creators.map((creator, i) => {
           return (
             <Creator
+              key={i}
               creator={{
                 image: creator.avatar,
                 name: `${creator.firstName} ${creator.lastName}`,

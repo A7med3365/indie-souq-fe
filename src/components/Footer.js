@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="pb-10">
         <img src="./logo-white.png" alt="inddie souq logo" />
       </div>
-      <div class="grid grid-cols-4 gap-12 content-around w-full py-10 text-2xl">
+      <div className="grid grid-cols-4 gap-12 content-around w-full py-10 text-2xl">
         <div>About</div>
         <div>Contact Us</div>
         <div>News</div>

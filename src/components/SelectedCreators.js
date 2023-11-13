@@ -5,7 +5,7 @@ export default function SelectedCreators({ creators }) {
     <div className="flex gap-5 justify-center">
       {creators.map((creator, i) => {
         return (
-          <div className="flex flex-col gap-4 cursor-pointer">
+          <div className="flex flex-col gap-4 cursor-pointer" key={i}>
             <img
               className="rounded-[59px] w-[270px] h-[304px] object-cover transition ease-in-out delay-150 hover:scale-110 hover:shadow-2xl duration-300 ease-in-out"
               src={creator.image}

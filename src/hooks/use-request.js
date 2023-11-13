@@ -25,7 +25,7 @@ export default function useRequest({ url, method, body, onSuccess }) {
       if (onSuccess) {
         await onSuccess(response);
       }
-      console.log(response.data);
+      console.log('hook:', response.data);
     } catch (err) {
       console.log(err.response.data.errors);
       setErrors(err.response.data.errors);

@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import Films from './pages/Films';
 import Tests from './pages/Tests';
 import ProjectDetails from './pages/ProjectDetails';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import Creators from './pages/Creators';
 import Profile from './pages/Profile';
@@ -14,10 +14,12 @@ import Signup from './pages/Signup';
 import useRequest from './hooks/use-request';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 // const backendUrl = process.env;
 
 export default function App() {
+  const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const { doRequest, isLoading } = useRequest({
@@ -27,23 +29,24 @@ export default function App() {
       if (res.data.currentUser) {
         setCurrentUser(res.data.currentUser);
         setIsAuth(true);
-        console.log(res.data);
+        // console.log(res.data);
       } else {
         setCurrentUser(null);
         setIsAuth(false);
       }
     },
   });
-  const fetch = async () => {
+  const fetch = useCallback(async () => {
     await doRequest();
-  };
+  }, [doRequest]);
+
   useEffect(() => {
     // console.log('REACT_APP_BACKEND_URL:', backendUrl);
     if (!process.env.REACT_APP_BACKEND_URL) {
       console.log('backend url must be defined');
     }
     fetch();
-  });
+  }, [location.pathname]);
   return (
     <div>
       <Navbar currentUser={currentUser} isAuth={isAuth} isLoading={isLoading} />

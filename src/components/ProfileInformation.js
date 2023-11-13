@@ -60,9 +60,12 @@ export default function ProfileInformation({ user }) {
         </div>
       </div>
       <div className="flex gap-[8px]">
-        {[1, 2, 3, 4].map((n) => {
+        {[1, 2, 3, 4].map((n, i) => {
           return (
-            <div className="px-[26px] py-[13px] border-[2px] border-orange rounded-[32px] text-orange text-[16px] leading-[19px] font-medium">{`Tag ${n}`}</div>
+            <div
+              className="px-[26px] py-[13px] border-[2px] border-orange rounded-[32px] text-orange text-[16px] leading-[19px] font-medium"
+              key={i}
+            >{`Tag ${n}`}</div>
           );
         })}
       </div>

@@ -29,9 +29,9 @@ export default function SelectedComments() {
           <path
             d="M14.9978 25.5L3.4978 14L14.9978 2.5"
             stroke="#D2D2D2"
-            stroke-width="5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
@@ -73,9 +73,9 @@ export default function SelectedComments() {
           <path
             d="M3.00232 25.5L14.5023 14L3.00232 2.5"
             stroke="#D2D2D2"
-            stroke-width="5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
