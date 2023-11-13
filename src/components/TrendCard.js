@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function TrendCard({ content }) {
   const percentage = Math.round(77.5 * content.percentage * 0.01) + '%';
-  console.log(percentage);
+  // console.log(percentage);
   return (
     <div className="w-[560px] h-[334px] inline-block snap-center rounded-[5rem] overflow-hidden flex relative">
       <img
