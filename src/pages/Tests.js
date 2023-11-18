@@ -1,61 +1,103 @@
-import React from 'react';
-import HeroSection from '../components/HeroSection';
+import React, { useEffect, useRef, useState } from 'react';
+
+import axios from 'axios';
+import { useDisclosure, Button } from '@nextui-org/react';
+import MyModal from '../components/MyModal';
+import DropzoneInput from '../components/DropzoneInput';
+import { Cropper } from 'react-cropper';
+import 'cropperjs/dist/cropper.css';
 
 export default function Test() {
-  let slides = [
-    {
-      image: './slide1.png',
-      content: {
-        title: 'The Skeleton Whale',
-        subtitle: 'Feature Film',
-        description:
-          'When Mariam discovers a talking skeleton whale, she must journey across a desolate Arabia with her companions to save the Whale, her home and everyone in it',
-        tags: ['Animation', 'Sci-Fi', 'Action'],
-      },
-    },
-    {
-      image: './slide2.png',
-      content: {
-        title: 'Small Dream',
-        subtitle: 'Short Film',
-        description:
-          'Living in Ras Al Khaimah, UAE, a conservative society, Maitha has a small and seemingly simple dream of swimming in the sea that she frequents.',
-        tags: ['Drama', 'Emotional'],
-      },
-    },
-    {
-      image: './slide3.png',
-      content: {
-        title: 'Spinster',
-        subtitle: 'Feature Film',
-        description:
-          'As an Emirati woman pushes 30, her family pressures her to settle down. Torn between two choices, Amal must marry to satisfy her family or stand alone.',
-        tags: ['Drama', 'Emotional'],
-      },
-    },
-    {
-      image: './slide4.png',
-      content: {
-        title: 'How to Not Get Married',
-        subtitle: 'Feature Film',
-        description:
-          'When Shahad, a niqabi and aspiring stand-up comedian, falls for her mentor, she learns love and marriage are more complex than her jokes portray.',
-        tags: ['Comedy', 'Romantic comedy'],
-      },
-    },
-    {
-      image: './slide5.png',
-      content: {
-        title: 'Reimagine entertainment Invest in new content',
-        subtitle: '',
-        description: '',
-        tags: [],
-      },
-    },
-  ];
+  const [file, setFile] = useState(null);
+  const [fileToUpload, setFileToUpload] = useState(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const cropper = useRef();
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFile(reader.result);
+        setFileToUpload(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCrop = () => {
+    if (cropper.current.cropper !== undefined) {
+      setFileToUpload(cropper.current.cropper.getCroppedCanvas().toDataURL());
+    }
+  };
+
+  useEffect(() => {
+    console.log(fileToUpload);
+  }, [fileToUpload]);
+
   return (
-    <div className="w-[1440px] m-auto">
-      <HeroSection slides={slides} />
+    <div>
+      <div className="w-[1440px] h-[335px] overflow-hidden m-auto border-gray border-dashed border-5">
+        {fileToUpload && (
+          <img src={fileToUpload} className="w-full object-cover" />
+        )}
+      </div>
+      <span className="w-auto flex justify-center">
+        <Button className="bg-orange m-auto" onPress={onOpen} variant="flat">
+          <p className="text-white text-xl px-2">
+            {fileToUpload ? 'Edit' : 'Upload'}
+          </p>
+        </Button>
+      </span>
+      <MyModal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <div className="bg-white w-[1000px] h-[700px] rounded-2xl p-5">
+          {file ? (
+            <>
+              <div className="w-full overflow-hidden">
+                <Cropper
+                  style={{ width: 'full' }}
+                  ref={cropper}
+                  src={file}
+                  aspectRatio={1440 / 335}
+                  viewMode={1}
+                  minCropBoxHeight={100}
+                  guides={true}
+                  background={false}
+                  // cropend={() => this.handleCropChange()}
+                />
+                {/* <img
+                  src={file}
+                  alt="Selected"
+                  classNameName="w-full h-[223px] object-cover rounded-lg m-auto"
+                /> */}
+              </div>
+              <div className="w-full flex justify-around mt-3">
+                <div>
+                  <label
+                    class="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    for="change-file"
+                  >
+                    Change file
+                  </label>
+                  <input
+                    id="change-file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    type="file"
+                    className="bg-orange rounded-lg"
+                  />
+                </div>
+                <Button className="bg-orange" onClick={handleCrop}>
+                  Crop
+                </Button>
+              </div>
+            </>
+          ) : (
+            <DropzoneInput handleImageChange={handleImageChange} />
+          )}
+        </div>
+      </MyModal>
     </div>
   );
 }
