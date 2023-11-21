@@ -5,7 +5,7 @@ const { nextui } = require('@nextui-org/react');
 module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
-    './node_modules/flowbite/**/*.js',
+    // './node_modules/flowbite/**/*.js',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
@@ -21,5 +21,6 @@ module.exports = {
     },
   },
   darkMode: 'class',
-  plugins: [require('flowbite/plugin'), nextui()],
+  plugins: [nextui()],
+  //plugins: [nextui(), require('flowbite/plugin')],
 };

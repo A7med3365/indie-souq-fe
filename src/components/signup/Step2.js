@@ -1,114 +1,101 @@
 import React, { useState } from 'react';
 import { Input, Textarea } from '@nextui-org/react';
+import SignupBannerAvatar from '../SignupBannerAvatar';
 
-export default function Step2({ data, setData }) {
-  const [file, setFile] = useState(null);
-  const [file2, setFile2] = useState(null);
-
-  // const handleSubmit = async () => {
-  //   console.log('uploading..');
-  //   const response = await axios.post(
-  //     'https://ih4rl4ru21.execute-api.me-south-1.amazonaws.com/default/S3FileUplaod',
-  //     {
-  //       fileName: 'test.png',
-  //       file: file,
-  //     }
-  //   );
-  //   console.log(response);
-  // };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setFile(reader.result);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  };
-  const handleImageChange2 = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setFile2(reader.result);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  };
+export default function Step2({ data, setData, files, setFiles }) {
   return (
-    <div className="w-full m-auto flex flex-col items-center gap-3">
-      {/* <Input
-        className="w-[50%]"
-        size="lg"
-        variant="bordered"
-        type="file"
-        label="Avatar"
-        value={data.avatar}
-        onValueChange={handleImageChange}
-        // onValueChange={(value) => {
-        //   setData({ ...data, avatar: value });
-        // }}
-      />
-      <Input
-        className="w-[50%]"
-        size="lg"
-        variant="bordered"
-        type="file"
-        label="Banner"
-        value={data.banner}
-        onValueChange={handleImageChange2}
-        // onValueChange={(value) => {
-        //   setData({ ...data, banner: value });
-        // }}
-      /> */}
-      <input
-        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-      />
-      <br />
-      <input
-        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange2}
-      />
-      <Textarea
-        className="w-[50%]"
-        variant="bordered"
-        label="Profile Description"
-        value={data.bio}
-        onValueChange={(value) => {
-          setData({ ...data, bio: value });
-        }}
-      />
-      {file && (
-        <div>
-          <img
-            src={file}
-            alt="Selected"
-            className="h-[335px] w-[1440px] object-cover border-[1.5px] border-gray m-auto"
+    <>
+      <SignupBannerAvatar data={files} setData={setFiles} />
+      <div className="flex flex-col items-center gap-5 -translate-y-[9.28125rem] mt-12">
+        <div className="w-[752px] flex gap-5 cursor-not-allowed">
+          <Input
+            isDisabled
+            variant="bordered"
+            size="lg"
+            type="name"
+            label="First name"
+            labelPlacement="outside"
+            placeholder="Enter first name"
+          />
+          <Input
+            isDisabled
+            variant="bordered"
+            size="lg"
+            type="name"
+            label="Last name"
+            labelPlacement="outside"
+            placeholder="Enter last name"
           />
         </div>
-      )}
-      {file2 && (
-        <div>
-          <img
-            src={file2}
-            alt="Selected"
-            className="w-[280px] h-[280px] border-[10px] border-white rounded-full overflow-hidden mb-[24px] m-auto"
-          />
-        </div>
-      )}
-    </div>
+        <Input
+          className="w-[752px]"
+          isDisabled
+          variant="bordered"
+          size="lg"
+          type="text"
+          label="Country"
+          labelPlacement="outside"
+          placeholder="Bahrain"
+          endContent={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="12"
+              viewBox="0 0 20 12"
+              fill="none"
+            >
+              <path
+                d="M8.97148 10.9715L0.483064 2.48306C-0.433248 1.56675 0.215722 0 1.51158 0H18.4884C19.7843 0 20.4332 1.56675 19.5169 2.48307L11.0285 10.9715C10.4605 11.5395 9.53952 11.5395 8.97148 10.9715Z"
+                fill="#939393"
+              />
+            </svg>
+          }
+        />
+        <Input
+          className="w-[752px]"
+          isDisabled
+          variant="bordered"
+          size="lg"
+          type="text"
+          label="Date of birth"
+          labelPlacement="outside"
+          placeholder="DD/MM/YYYY"
+        />
+        <Input
+          className="w-[752px]"
+          isDisabled
+          variant="bordered"
+          size="lg"
+          type="text"
+          label="Select your Occupation"
+          labelPlacement="outside"
+          placeholder="Filmmaker"
+          endContent={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="12"
+              viewBox="0 0 20 12"
+              fill="none"
+            >
+              <path
+                d="M8.97148 10.9715L0.483064 2.48306C-0.433248 1.56675 0.215722 0 1.51158 0H18.4884C19.7843 0 20.4332 1.56675 19.5169 2.48307L11.0285 10.9715C10.4605 11.5395 9.53952 11.5395 8.97148 10.9715Z"
+                fill="#939393"
+              />
+            </svg>
+          }
+        />
+        <Textarea
+          className="w-[752px] h-[293px]"
+          variant="bordered"
+          label="Profile Description"
+          labelPlacement="outside"
+          value={data.bio}
+          onValueChange={(value) => {
+            setData({ ...data, bio: value });
+          }}
+        />
+      </div>
+    </>
   );
 }
