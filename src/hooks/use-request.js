@@ -8,11 +8,9 @@ export default function useRequest({ url, method, body, onSuccess }) {
 
   const doRequest = async (props = {}) => {
     try {
-      console.log(
-        `calling ${process.env.REACT_APP_BACKEND_URL}${url} using ${method}`
-      );
+      console.log(`calling ${url} using ${method}`);
       const response = await axios[method](
-        `${process.env.REACT_APP_BACKEND_URL}${url}`,
+        `${url}`,
         {
           ...body,
           ...props,
