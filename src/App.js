@@ -15,6 +15,8 @@ import useRequest from './hooks/use-request';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
+import ProjectCreateUpdate from './pages/ProjectCreateUpdate';
+import UserDashboard from './pages/UserDashboard';
 
 // const backendUrl = process.env;
 
@@ -81,6 +83,8 @@ export default function App() {
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/project" element={<ProjectCreateUpdate />} />
+        <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/t" element={<Tests />} />
       </Routes>
       <div className="bg-footerBg w-full mt-20">
