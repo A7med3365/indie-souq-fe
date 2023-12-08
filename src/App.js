@@ -18,11 +18,16 @@ import { useCallback } from 'react';
 import ProjectCreateUpdate from './pages/ProjectCreateUpdate';
 import UserDashboard from './pages/UserDashboard';
 
+import { useRecoilState } from 'recoil';
+// import { currentUser } from './store/states';
+
 // const backendUrl = process.env;
 
 export default function App() {
   const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
+  const [hide, setHide] = useState(false)
+  // const [userId, setUserId] = useRecoilState(currentUser);
   const [userId, setUserId] = useState(null);
   const { doRequest, isLoading } = useRequest({
     url: '/api/users/currentuser',
@@ -67,14 +72,25 @@ export default function App() {
   useEffect(() => {
     console.log(userId);
   }, [userId]);
+
+  useEffect(()=>{
+    // console.log({window});
+    if (window.location.pathname === '/project') {
+      setHide(true)
+    } else {
+      setHide(false);
+    }
+  },[window.location.pathname])
   return (
     <div>
-      <Navbar
-        userId={userId}
-        isAuth={isAuth}
-        isLoading={isLoading}
-        logout={logout}
-      />
+      {!hide && (
+        <Navbar
+          userId={userId}
+          isAuth={isAuth}
+          isLoading={isLoading}
+          logout={logout}
+        />
+      )}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/films" element={<Films />} />
@@ -84,14 +100,17 @@ export default function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/project" element={<ProjectCreateUpdate />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
+        <Route path="/project/:projectId" element={<ProjectCreateUpdate />} />
+        <Route path="/dashboard" element={<UserDashboard userId={userId} />} />
         <Route path="/t" element={<Tests />} />
       </Routes>
-      <div className="bg-footerBg w-full mt-20">
-        <div className="max-w-[1150px] m-auto text-white px-10 py-28 xl:px-0">
-          <Footer />
+      {!hide && (
+        <div className="bg-footerBg w-full mt-20">
+          <div className="max-w-[1150px] m-auto text-white px-10 py-28 xl:px-0">
+            <Footer />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

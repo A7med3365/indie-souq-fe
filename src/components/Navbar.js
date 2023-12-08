@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Navbar as Nav,
   NavbarBrand,
@@ -13,8 +13,14 @@ import {
 import NavbarAvatar from './NavbarAvatar';
 import MyModal from './MyModal';
 
+// import { currentUser } from '../store/states';
+import { useRecoilValue } from 'recoil';
+import useRequest from '../hooks/use-request';
+import { useNavigate } from 'react-router-dom';
+
 export default function Navbar({ userId, isAuth, logout }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  // const userId = useRecoilValue(currentUser);
   return (
     <>
       <Nav maxWidth="2xl" className="px-5 2xl:px-0" isBlurred>
@@ -56,29 +62,28 @@ export default function Navbar({ userId, isAuth, logout }) {
         </NavbarContent>
         <NavbarContent justify="end" className="flex gap-[8px]">
           <NavbarItem>
-            <Button
-              as={Link}
-              className="bg-orange w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
-              href="/"
-              variant="flat"
-            >
-              <p className="text-white text-base font-semibold px-2">
-                Support project
-              </p>
-            </Button>
-          </NavbarItem>
-          <NavbarItem>
-            <Button
-              // as={Link}
-              className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
-              // href="/"
-              variant="flat"
-              onClick={onOpen}
-            >
-              <p className="text-orange text-base font-semibold px-2">
-                Submit project
-              </p>
-            </Button>
+            {isAuth ? (
+              <Button
+                className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
+                variant="flat"
+                onClick={onOpen}
+              >
+                <p className="text-orange text-base font-semibold px-2">
+                  New project
+                </p>
+              </Button>
+            ) : (
+              <Button
+                // as={Link}
+                className="bg-orange w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
+                // href="/"
+                variant="flat"
+              >
+                <p className="text-white text-base font-semibold px-2">
+                  Get Started
+                </p>
+              </Button>
+            )}
           </NavbarItem>
           <NavbarItem className="hidden lg:flex">
             {isAuth ? (
@@ -95,31 +100,71 @@ export default function Navbar({ userId, isAuth, logout }) {
         </NavbarContent>
       </Nav>
       <MyModal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <div className=" w-2/4 h-fit p-9 bg-white rounded-2xl flex flex-col gap-5">
-          <p className=" text-orange text-lg">Your project Title:</p>
-          <Input
-            // isDisabled
-            variant="bordered"
-            size="lg"
-            type="text"
-            // label="Project Title"
-            // labelPlacement=""
-            placeholder="Enter Title"
-            classNames={{
-              inputWrapper: 'text-gray2',
-            }}
-          />
-          <Button
-            className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl mx-auto mt-4"
-            variant="flat"
-            onClick={onOpen}
-          >
-            <p className="text-orange text-base font-semibold px-2">
-              Create project
-            </p>
-          </Button>
-        </div>
+        <CreateProject userId={userId} onClose={onClose} />
       </MyModal>
     </>
+  );
+}
+
+function CreateProject({ userId, onClose }) {
+  const nav = useNavigate();
+  // const userId = useRecoilValue(currentUser);
+  const [projectTitle, setTitle] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { doRequest } = useRequest({
+    url: '/api/projects',
+    method: 'post',
+    // body: { ...data },
+    onSuccess: (res) => {
+      console.log(res);
+      nav('/dashboard');
+      setLoading(false);
+      onClose();
+    },
+  });
+
+  const handleSubmit = async () => {
+    if (projectTitle.length < 3) {
+      return;
+    }
+    setLoading(true);
+
+    doRequest({ creator: userId, title: projectTitle });
+  };
+
+  if (loading) {
+    return (
+      <div className=" w-2/4 h-fit p-9 bg-white rounded-2xl flex flex-col gap-5">
+        <Spinner />
+      </div>
+    );
+  }
+
+  return (
+    <div className=" w-2/4 h-fit p-9 bg-white rounded-2xl flex flex-col gap-5">
+      <p className=" text-orange text-lg">Your project Title:</p>
+      <Input
+        // isDisabled
+        variant="bordered"
+        size="lg"
+        type="text"
+        onChange={(e) => setTitle(e.target.value)}
+        // label="Project Title"
+        // labelPlacement=""
+        placeholder="Enter Title"
+        classNames={{
+          inputWrapper: 'text-gray2',
+        }}
+      />
+      <Button
+        className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl mx-auto mt-4"
+        variant="flat"
+        onClick={handleSubmit}
+      >
+        <p className="text-orange text-base font-semibold px-2">
+          Create project
+        </p>
+      </Button>
+    </div>
   );
 }

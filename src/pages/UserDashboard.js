@@ -1,7 +1,27 @@
-import { Tooltip } from '@nextui-org/react';
-import React from 'react';
+import { Spinner, Tooltip } from '@nextui-org/react';
+import React, { useState } from 'react';
+import useRequest from '../hooks/use-request';
 
-export default function UserDashboard() {
+export default function UserDashboard({ userId }) {
+  const [projects, setProjects] = useState([]);
+  const { doRequest, isLoading, errors } = useRequest({
+    url: `/api/user-projects/${userId}`,
+    method: 'get',
+    onSuccess: (res) => {
+      setProjects(res.data);
+      // console.log(res.data);
+    },
+  });
+
+  React.useEffect(() => {
+    const fetchProjectsData = async () => {
+      if (userId) {
+        await doRequest();
+      }
+    };
+    fetchProjectsData();
+  }, [userId]);
+
   const dummy = [
     { title: 'Project Title', isPub: true },
     { title: 'Project Title', isPub: false },
@@ -10,11 +30,27 @@ export default function UserDashboard() {
     { title: 'Project Title', isPub: true },
     { title: 'Project Title', isPub: true },
   ];
+
+  if (isLoading || projects.length === 0) {
+    return (
+      <div className="flex justify-center my-[88px]">
+        <Spinner label="Loading..." size="lg" />
+      </div>
+    );
+  }
+
+  if (errors) {
+    return <div>errors</div>;
+  }
   return (
     <div className="flex flex-col gap-7 max-w-[1440px] m-auto mt-8">
-      {dummy.map((project, i) => {
+      {projects.map((project, i) => {
         return (
-          <ProjectCard title={project.title} isPub={project.isPub} key={i} />
+          <ProjectCard
+            title={project.title}
+            isPub={project.isPublished}
+            key={i}
+          />
         );
       })}
     </div>
