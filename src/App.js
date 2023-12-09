@@ -77,7 +77,7 @@ export default function App() {
 
   useEffect(() => {
     // console.log({window});
-    if (window.location.pathname === '/project') {
+    if (window.location.pathname.startsWith('/project')) {
       setHide(true);
     } else {
       setHide(false);

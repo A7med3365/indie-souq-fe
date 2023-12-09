@@ -7,10 +7,13 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownSection,
+  Link,
 } from '@nextui-org/react';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavbarAvatar({ userId, logout }) {
   //   const userId = currentUser.id;
+  const nav = useNavigate();
   const [user, setUser] = React.useState(null);
   const { doRequest, isLoading } = useRequest({
     url: `/api/users/${userId}`,
@@ -60,7 +63,7 @@ export default function NavbarAvatar({ userId, logout }) {
             <DropdownItem textValue="settings" key="settings">
               Settings
             </DropdownItem>
-            <DropdownItem textValue="Projects" key="Projects">
+            <DropdownItem textValue="Projects" key="Projects" onClick={e=>nav(`/dashboard`)}>
               Projects
             </DropdownItem>
             <DropdownItem textValue="analytics" key="analytics">

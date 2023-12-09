@@ -1,108 +1,57 @@
 import React from 'react';
-import ProjectCreateSteps from '../components/ProjectCreateSteps';
-import { Button } from '@nextui-org/react';
+import ReactPlayer from 'react-player';
+import DetailsPreview from '../components/DetailsPreview';
+import DropzoneInputMulti from '../components/DropzoneInputMulti';
 
 export default function Test() {
-  const [selected, setSelected] = React.useState(0);
-  const [complete, setComplete] = React.useState([
-    true,
-    true,
-    false,
-    false,
-    false,
-  ]);
+  const [images, setImages] = React.useState([]);
+  const [files, setFiles] = React.useState([]);
 
-  const forms = [
-    <DetailsForm />,
-    <CrewForm />,
-    <FundingForm />,
-    <BudgetForm />,
-    <RewardForm />,
-  ];
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    const images = files.map((file) => URL.createObjectURL(file));
 
+    setImages(images);
+    setFiles(files);
+  };
+
+  const handleSubmit = (e) => {
+    const formData = new FormData();
+    files.forEach((file) => {
+      formData.append('file', file, file.name);
+    });
+    console.log(formData.values());
+  };
+  // return <DetailsPreview />;
   return (
-    <div className="flex gap-5">
-      <div className="w-unit-9xl h-[900px] shadow-[0_0px_23px_0px_rgba(0,0,0,0.1)] flex flex-col justify-center gap-12">
-        <ProjectCreateSteps
-          selected={selected}
-          setSelected={setSelected}
-          complete={complete}
-        />
-        <div className="flex gap-5 mx-auto">
-          <Button
-            className="bg-orange w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
-            variant="flat"
-          >
-            <p className="text-white text-base font-semibold px-2">
-              Save draft
-            </p>
-          </Button>
-          <Button
-            className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
-            variant="flat"
-          >
-            <p className="text-orange text-base font-semibold px-2">
-              Submit project
-            </p>
-          </Button>
+    <>
+      <DropzoneInputMulti handleImageChange={handleImageChange} />
+      <div class="flex flex-col bg-white w-full relative">
+        <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+          <div class="flex flex-nowrap gap-[20px]">
+            {images.map((image, i) => {
+              return (
+                <div key={i} class="inline-block">
+                  <div
+                    class="w-[158px] h-[118px] max-w-xs overflow-hidden rounded-[25px] shadow-md bg-gray1 hover:shadow-xl transition-shadow duration-300 ease-in-out"
+                    // onClick={() => {
+                    //   setSelected(i);
+                    // }}
+                  >
+                    <img
+                      alt={i}
+                      src={image}
+                      className="object-cover h-[118px]"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
-      <div className="ml-24 mt-16">{forms[selected]}</div>
-    </div>
+      <button onClick={handleSubmit}>Submit</button>
+    </>
   );
 }
 
-function DetailsForm() {
-  return (
-    <div className="flex flex-col gap-14">
-      <div className="text-[#f15a2b] text-lg font-medium leading-[normal] flex flex-col">
-        Project details
-        <span className="w-[700px] border border-orange mt-[13px]"></span>
-      </div>
-    </div>
-  );
-}
-
-function CrewForm() {
-  return (
-    <div className="flex flex-col gap-14">
-      <div className="text-[#f15a2b] text-lg font-medium leading-[normal] flex flex-col">
-        Cast & crew
-        <span className="w-[700px] border border-orange mt-[13px]"></span>
-      </div>
-    </div>
-  );
-}
-
-function FundingForm() {
-  return (
-    <div className="flex flex-col gap-14">
-      <div className="text-[#f15a2b] text-lg font-medium leading-[normal] flex flex-col">
-        Funding details
-        <span className="w-[700px] border border-orange mt-[13px]"></span>
-      </div>
-    </div>
-  );
-}
-
-function BudgetForm() {
-  return (
-    <div className="flex flex-col gap-14">
-      <div className="text-[#f15a2b] text-lg font-medium leading-[normal] flex flex-col">
-        Budget distribution
-        <span className="w-[700px] border border-orange mt-[13px]"></span>
-      </div>
-    </div>
-  );
-}
-
-function RewardForm() {
-  return (
-    <div className="flex flex-col gap-14">
-      <div className="text-[#f15a2b] text-lg font-medium leading-[normal] flex flex-col">
-        Reward system
-        <span className="w-[700px] border border-orange mt-[13px]"></span>
-      </div>
-    </div>
-  );
-}
