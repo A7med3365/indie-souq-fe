@@ -17,6 +17,8 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 import ProjectCreateUpdate from './pages/ProjectCreateUpdate';
 import UserDashboard from './pages/UserDashboard';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { useRecoilState } from 'recoil';
 // import { currentUser } from './store/states';
@@ -26,7 +28,7 @@ import { useRecoilState } from 'recoil';
 export default function App() {
   const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
-  const [hide, setHide] = useState(false)
+  const [hide, setHide] = useState(false);
   // const [userId, setUserId] = useRecoilState(currentUser);
   const [userId, setUserId] = useState(null);
   const { doRequest, isLoading } = useRequest({
@@ -73,14 +75,14 @@ export default function App() {
     console.log(userId);
   }, [userId]);
 
-  useEffect(()=>{
+  useEffect(() => {
     // console.log({window});
     if (window.location.pathname === '/project') {
-      setHide(true)
+      setHide(true);
     } else {
       setHide(false);
     }
-  },[window.location.pathname])
+  }, [window.location.pathname]);
   return (
     <div>
       {!hide && (
@@ -111,6 +113,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }

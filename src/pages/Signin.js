@@ -1,15 +1,16 @@
 import { Button, Input, Link } from '@nextui-org/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { EyeFilledIcon } from '../components/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../components/EyeSlashFilledIcon';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
+import { toast } from 'react-toastify';
 
 export default function Signin() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [data, setData] = React.useState({ email: '', password: '' });
   const nav = useNavigate();
-  const { doRequest } = useRequest({
+  const { doRequest, errors } = useRequest({
     url: '/api/users/signin',
     method: 'post',
     body: { ...data },
@@ -18,6 +19,19 @@ export default function Signin() {
       nav('/');
     },
   });
+
+  useEffect(() => {
+    if (errors) {
+      errors.map((e) =>
+        toast.error(e.message, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+        })
+      );
+    }
+  }, [errors]);
 
   React.useEffect(() => {
     console.log(data);

@@ -1,10 +1,12 @@
 import { Button } from '@nextui-org/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Step1 from '../components/signup/Step1';
 import Step2 from '../components/signup/Step2';
 import useRequest from '../hooks/use-request';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -28,24 +30,47 @@ export default function Signup() {
     avatar: { file: '', fileName: '' },
   });
 
-  const { doRequest: step1 } = useRequest({
+  const { doRequest: step1, errors:err1 } = useRequest({
     url: '/api/users/signup',
     method: 'post',
     body: { ...data },
     onSuccess: (res) => {
       setUserId(res.data.id);
       setStep(step + 1);
+      toast.success('Account created successfully!')
     },
   });
-  const { doRequest: step2 } = useRequest({
+  const { doRequest: step2, errors: err2 } = useRequest({
     url: `/api/users/${userId}`,
     method: 'put',
     // body: { ...data2 },
     onSuccess: (res) => {
       setUserId(res.data.id);
       navigate('/creators');
+      toast.success('Account updated successfully!')
     },
   });
+
+  useEffect(() => {
+    if (err1) {
+      err1.map((e) => toast.error(e.message,{
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+      }));
+    }
+    if (err2) {
+      err2.map((e) => toast.error(e.message,{
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+      }));
+    }    
+  }, [err1, err2]);
 
   const handleSubmit = async () => {
     const base64avatar = await fetch(files.avatar.file);
@@ -117,15 +142,17 @@ export default function Signup() {
   }, [data2]);
 
   return (
-    <div className="m-auto w-[1440px] py-20 px-40 flex flex-col items-center gap-3 focus:border-orange">
-      {steps[step]}
-      <Button
-        size="lg"
-        className="bg-orange text-white text-lg font-semibold mt-4"
-        onClick={onNext}
-      >
-        Next
-      </Button>
-    </div>
+    <>
+      <div className="m-auto w-[1440px] py-20 px-40 flex flex-col items-center gap-3 focus:border-orange">
+        {steps[step]}
+        <Button
+          size="lg"
+          className="bg-orange text-white text-lg font-semibold mt-4"
+          onClick={onNext}
+        >
+          Next
+        </Button>
+      </div>
+    </>
   );
 }

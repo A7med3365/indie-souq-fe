@@ -17,6 +17,7 @@ import MyModal from './MyModal';
 import { useRecoilValue } from 'recoil';
 import useRequest from '../hooks/use-request';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Navbar({ userId, isAuth, logout }) {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -120,6 +121,7 @@ function CreateProject({ userId, onClose }) {
       nav('/dashboard');
       setLoading(false);
       onClose();
+      toast.success('Project created successfully');
     },
   });
 
