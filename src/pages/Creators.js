@@ -22,9 +22,10 @@ export default function Creators() {
       await doRequest();
     };
     fetchCreatorsData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading || creators.length == 0) {
+  if (isLoading || creators.length === 0) {
     return (
       <div className="flex justify-center my-[88px]">
         <Spinner label="Loading..." size="lg" />

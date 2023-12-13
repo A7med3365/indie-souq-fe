@@ -14,7 +14,7 @@ import NavbarAvatar from './NavbarAvatar';
 import MyModal from './MyModal';
 
 // import { currentUser } from '../store/states';
-import { useRecoilValue } from 'recoil';
+// import { useRecoilValue } from 'recoil';
 import useRequest from '../hooks/use-request';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';

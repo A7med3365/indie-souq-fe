@@ -26,10 +26,9 @@ export default function DetailsForm({
     type: type || '',
     genre: genre || [],
     story: story || '',
-    media: media || [],
   });
   const [files, setFiles] = useState([]);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([...media]);
   const [selectedGenres, setSelected] = useState(new Set(genre || []));
   const [selectedType, setSelectedType] = useState(new Set([type] || ['']));
 
@@ -54,9 +53,11 @@ export default function DetailsForm({
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    const images = files.map((file) => URL.createObjectURL(file));
+    const imagesTemp = files.map((file) => URL.createObjectURL(file));
 
-    setImages(images);
+    let temp = [...images]
+    temp.push(...imagesTemp)
+    setImages(temp);
     setFiles(files);
   };
 
@@ -69,12 +70,14 @@ export default function DetailsForm({
 
       return axios
         .post('/api/upload', formData)
-        .then((res) =>
-          updateDetails('media', [...details.media, res.data.url])
+        .then((res) => {
+          // updateDetails('media', [...details.media, res.data.url])
+          return res.data.url
+        }
         );
     })
-
-    return Promise.all(uploadPromises);
+    const urls = Promise.all(uploadPromises);
+    return urls;
   }
 
   const updateGenre = (genre) => {
@@ -118,9 +121,10 @@ export default function DetailsForm({
         return temp;
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
-  const { doRequest, isLoading, errors } = useRequest({
+  const { doRequest,errors } = useRequest({
     url: `/api/projects/${id}`,
     method: 'put',
   });
@@ -253,14 +257,21 @@ export default function DetailsForm({
           className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
           variant="flat"
           onClick={async (e) => {
-            await uploadImages();
+            const toastId = toast.loading("Uploading Images...")
+            const images = await uploadImages();
+            toast.update(toastId, {
+              render: 'Images Uploaded',
+              type: 'success',
+              isLoading: false,
+              autoClose: 5000,
+            });
             const p = doRequest({
               title: details.title,
               type: details.type,
               genre: details.genre,
               details: {
                 story: details.story,
-                media: details.media,
+                media: [...media, ...images],
               },
             });
             toast.promise(p, {

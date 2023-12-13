@@ -22,6 +22,7 @@ export default function Profile() {
       await doRequest();
     };
     fetchUserData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   React.useEffect(() => {
     console.log(userId);

@@ -1,5 +1,5 @@
-import { Button, useDisclosure } from '@nextui-org/react';
-import React, { useRef } from 'react';
+import { useDisclosure } from '@nextui-org/react';
+import React from 'react';
 import MyModal from './MyModal';
 import MyCropper from './mycropper';
 import DropzoneInput from './DropzoneInput';

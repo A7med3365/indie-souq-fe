@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProjectCreateSteps from '../components/ProjectCreateSteps';
-import { Button, ButtonGroup, Chip, Select, SelectItem, Textarea } from '@nextui-org/react';
-import { Input } from '@nextui-org/react';
-import DropzoneInput from '../components/DropzoneInput';
+import { Button } from '@nextui-org/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import DetailsForm from '../components/forms/DetailsForm';
@@ -38,6 +36,7 @@ export default function ProjectCreateUpdate() {
       await doRequest();
     };
     fetchProjectData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
@@ -46,8 +45,8 @@ export default function ProjectCreateUpdate() {
 
   const forms = [
     <DetailsForm
-      title={project.title }
-      type={project.type }
+      title={project.title}
+      type={project.type}
       genre={project.genre}
       story={project.details.story}
       media={project.details.media}
@@ -55,8 +54,8 @@ export default function ProjectCreateUpdate() {
       id={projectId}
     />,
     <CrewForm />,
-    <FundingForm />,
-    <BudgetForm />,
+    <FundingForm setComplete={setComplete} />,
+    <BudgetForm setComplete={setComplete} />,
     <RewardForm />,
   ];
 
@@ -80,6 +79,7 @@ export default function ProjectCreateUpdate() {
           <Button
             className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
             variant="flat"
+            disabled = {complete[0] && complete[2]}
           >
             <p className="text-orange text-base font-semibold px-2">
               Submit project

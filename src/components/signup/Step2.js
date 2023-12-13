@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input, Textarea } from '@nextui-org/react';
 import SignupBannerAvatar from '../SignupBannerAvatar';
 

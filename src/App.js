@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import Films from './pages/Films';
 import Tests from './pages/Tests';
 import ProjectDetails from './pages/ProjectDetails';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Creators from './pages/Creators';
 import Profile from './pages/Profile';
@@ -14,19 +14,19 @@ import Signup from './pages/Signup';
 import useRequest from './hooks/use-request';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useCallback } from 'react';
+// import { useCallback } from 'react';
 import ProjectCreateUpdate from './pages/ProjectCreateUpdate';
 import UserDashboard from './pages/UserDashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useRecoilState } from 'recoil';
+// import { useRecoilState } from 'recoil';
 // import { currentUser } from './store/states';
 
 // const backendUrl = process.env;
 
 export default function App() {
-  const location = useLocation();
+  // const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
   const [hide, setHide] = useState(false);
   // const [userId, setUserId] = useRecoilState(currentUser);
@@ -59,17 +59,21 @@ export default function App() {
     await doLogout();
   };
 
-  const fetch = useCallback(async () => {
-    await doRequest();
-  }, [doRequest]);
+  // const fetch = useCallback(async () => {
+  //   await doRequest();
+  // }, [doRequest]);
 
   useEffect(() => {
     // console.log('REACT_APP_BACKEND_URL:', backendUrl);
     if (!process.env.REACT_APP_BACKEND_URL) {
       console.log('backend url must be defined');
     }
+    const fetch = ()=>{
+      doRequest()
+    }
     fetch();
-  }, [location.pathname]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     console.log(userId);
@@ -82,6 +86,7 @@ export default function App() {
     } else {
       setHide(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.location.pathname]);
   return (
     <div>

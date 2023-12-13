@@ -20,16 +20,17 @@ export default function UserDashboard({ userId }) {
       }
     };
     fetchProjectsData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
-  const dummy = [
-    { title: 'Project Title', isPub: true },
-    { title: 'Project Title', isPub: false },
-    { title: 'Project Title', isPub: true },
-    { title: 'Project Title', isPub: true },
-    { title: 'Project Title', isPub: true },
-    { title: 'Project Title', isPub: true },
-  ];
+  // const dummy = [
+  //   { title: 'Project Title', isPub: true },
+  //   { title: 'Project Title', isPub: false },
+  //   { title: 'Project Title', isPub: true },
+  //   { title: 'Project Title', isPub: true },
+  //   { title: 'Project Title', isPub: true },
+  //   { title: 'Project Title', isPub: true },
+  // ];
 
   if (isLoading || projects.length === 0) {
     return (

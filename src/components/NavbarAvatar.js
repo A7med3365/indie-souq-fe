@@ -7,7 +7,6 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownSection,
-  Link,
 } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +28,7 @@ export default function NavbarAvatar({ userId, logout }) {
       await doRequest();
     };
     fetchUserData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (isLoading) {
     return <div>Loading...</div>;

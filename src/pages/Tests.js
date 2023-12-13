@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactPlayer from 'react-player';
-import DetailsPreview from '../components/DetailsPreview';
+// import ReactPlayer from 'react-player';
+// import DetailsPreview from '../components/DetailsPreview';
 import DropzoneInputMulti from '../components/DropzoneInputMulti';
 
 export default function Test() {
