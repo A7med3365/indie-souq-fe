@@ -140,7 +140,7 @@ export default function BudgetForm({ setComplete }) {
                   onChange={(e) => {
                     setSelected(i);
                     let temp = [...sections];
-                    temp[i].title = e.target.value;
+                    temp[i].title = e.target.value.replace(/[^A-Za-z ]/, '');
                     setSections(temp);
                   }}
                   className="w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
