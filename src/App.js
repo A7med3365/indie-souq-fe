@@ -81,7 +81,8 @@ export default function App() {
 
   useEffect(() => {
     // console.log({window});
-    if (window.location.pathname.startsWith('/project')) {
+    const path = window.location.pathname;
+    if (path.startsWith('/project') || path.startsWith('/dashboard')) {
       setHide(true);
     } else {
       setHide(false);
