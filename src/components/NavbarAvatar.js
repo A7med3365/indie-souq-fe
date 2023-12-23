@@ -27,7 +27,7 @@ export default function NavbarAvatar({ userId, logout }) {
     const fetchUserData = async () => {
       await doRequest();
     };
-    fetchUserData();
+    if (userId) fetchUserData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (isLoading) {
@@ -50,6 +50,7 @@ export default function NavbarAvatar({ userId, logout }) {
             <DropdownItem
               textValue="profile"
               key="profile"
+              onClick={(e) => nav(`/dashboard?s=0`)}
               className="h-14 gap-2"
             >
               <p className="font-semibold">Signed in as</p>
@@ -60,13 +61,25 @@ export default function NavbarAvatar({ userId, logout }) {
           </DropdownSection>
           <DropdownSection showDivider>
             {/* <DropdownItem key="profile">Your Profile</DropdownItem> */}
-            <DropdownItem textValue="settings" key="settings">
+            <DropdownItem
+              textValue="settings"
+              key="settings"
+              onClick={(e) => nav(`/dashboard?s=3`)}
+            >
               Settings
             </DropdownItem>
-            <DropdownItem textValue="Projects" key="Projects" onClick={e=>nav(`/dashboard`)}>
+            <DropdownItem
+              textValue="Projects"
+              key="Projects"
+              onClick={(e) => nav(`/dashboard?s=1`)}
+            >
               Projects
             </DropdownItem>
-            <DropdownItem textValue="analytics" key="analytics">
+            <DropdownItem
+              textValue="analytics"
+              key="analytics"
+              onClick={(e) => nav(`/dashboard?s=2`)}
+            >
               Analytics
             </DropdownItem>
             <DropdownItem textValue="history" key="history">

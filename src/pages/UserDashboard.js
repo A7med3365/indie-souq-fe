@@ -8,10 +8,11 @@ import {
   ProjectsIcon,
   SettingsIcon,
 } from '../components/Dashboard/DashboardIcons';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Profile from '../components/Dashboard/Profile';
 
 export default function UserDashboard({ userId }) {
+  const nav = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const sections = [
@@ -47,7 +48,7 @@ export default function UserDashboard({ userId }) {
   return (
     <div className="flex gap-24 pt-4 h-[100dvh]">
       <div className="bg-gray-300 w-[25dvw] h-full shadow-xl rounded-tl-3xl ml-5">
-        <Logo className={'flex justify-center mt-4 cursor-pointer'} />
+        <Logo className={'flex justify-center mt-4 cursor-pointer'} onClick={()=>nav('/')}/>
         <div className="flex flex-col gap-4 mt-14">
           {sections.map((section, i) => {
             return (

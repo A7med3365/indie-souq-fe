@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import Step2 from '../signup/Step2';
 import useRequest from '../../hooks/use-request';
 import { toast } from 'react-toastify';
+import { Button } from '@nextui-org/button';
+import { uploadBase64Files } from '../../util/files';
 
 export default function Profile({ userId }) {
   const [data, setData] = React.useState({
@@ -33,7 +35,7 @@ export default function Profile({ userId }) {
     const fetch = async () => {
       await doRequest();
     };
-    fetch();
+    if (userId) fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -41,20 +43,24 @@ export default function Profile({ userId }) {
     url: `/api/users/${userId}`,
     method: 'put',
     body: { ...data },
-    onSuccess: (res) => {
-      toast.success('Profile updated successfully!');
-    },
-  })
+    // onSuccess: (res) => {
+    //   toast.success('Profile updated successfully!');
+    // },
+  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const prom = updateProfile();
-    toast.promise(prom, {
-      pending: 'Updating profile...',
-      success: 'Profile updated successfully!',
-      error: 'Error updating profile',
+    const urls = await uploadBase64Files(files);
+    console.log({urls});
+    const toastId = toast.loading('Updating profile...');
+    await updateProfile(urls);
+    toast.update(toastId, {
+      render: 'Profile updated successfully!',
+      type: toast.TYPE.SUCCESS,
+      isLoading: false,
+      autoClose: 2000,
     });
-  }
+  };
 
   if (errors) {
     errors.map((e) =>
@@ -68,10 +74,33 @@ export default function Profile({ userId }) {
     );
     return <div></div>;
   }
+
+  if (err2) {
+    err2.map((e) =>
+      toast.error(e.message, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+      })
+    );
+    return <div></div>;
+  }
   return (
     <div>
       <Step2 data={data} setData={setData} files={files} setFiles={setFiles} />
-      <button onClick={handleSubmit}>Submit</button>
+      <div className="flex -translate-y-24">
+        <Button
+          className="border border-orange bg-[rgb(0,0,0,0)] m-auto w-[700px] h-[100px] p-[12.56px] rounded-xl"
+          variant="flat"
+          onClick={handleSubmit}
+        >
+          <p className="text-orange text-3xl font-semibold px-2">
+            Update profile
+          </p>
+        </Button>
+      </div>
     </div>
   );
 }

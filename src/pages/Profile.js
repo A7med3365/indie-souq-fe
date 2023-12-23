@@ -21,7 +21,7 @@ export default function Profile() {
     const fetchUserData = async () => {
       await doRequest();
     };
-    fetchUserData();
+    if (userId) fetchUserData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   React.useEffect(() => {

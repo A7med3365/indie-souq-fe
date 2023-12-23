@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@nextui-org/react';
+import { capitalize } from '../util/str';
 
 export default function ProfileInformation({ user }) {
   return (
@@ -10,7 +11,7 @@ export default function ProfileInformation({ user }) {
             {`${user.firstName} ${user.lastName}`}
           </p>
           <p className="text-[24px] leading[29px] font-medium text-[#BFBFBF] mb-[23px]">
-            Film Maker | Bahrain
+            {capitalize(user.role)} | {capitalize(user.location)}
           </p>
           <p className="text-[24px] leading-[29px] font-normal text-black ">
             {user.bio}

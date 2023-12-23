@@ -79,7 +79,7 @@ export default function ProjectCreateUpdate() {
           <Button
             className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
             variant="flat"
-            disabled = {complete[0] && complete[2]}
+            disabled = {!(complete[0] && complete[2])}
           >
             <p className="text-orange text-base font-semibold px-2">
               Submit project

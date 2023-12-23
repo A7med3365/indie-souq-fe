@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import Films from './pages/Films';
 import Tests from './pages/Tests';
 import ProjectDetails from './pages/ProjectDetails';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import Creators from './pages/Creators';
 import Profile from './pages/Profile';
@@ -26,7 +26,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // const backendUrl = process.env;
 
 export default function App() {
-  // const location = useLocation();
+  const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
   const [hide, setHide] = useState(false);
   // const [userId, setUserId] = useRecoilState(currentUser);
@@ -81,14 +81,14 @@ export default function App() {
 
   useEffect(() => {
     // console.log({window});
-    const path = window.location.pathname;
+    const path = location.pathname;
     if (path.startsWith('/project') || path.startsWith('/dashboard')) {
       setHide(true);
     } else {
       setHide(false);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.location.pathname]);
+  }, [location.pathname]);
   return (
     <div>
       {!hide && (
