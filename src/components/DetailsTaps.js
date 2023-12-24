@@ -9,12 +9,13 @@ export default function DetailsTaps() {
       <Tabs
         variant="underlined"
         aria-label="Project Details Tabs"
+        disabledKeys={['Cast','Script','Updates','Discussion']}
         classNames={{
-          tabList: "gap-[41px] w-full relative rounded-none p-0 ",
-          cursor: "w-full bg-orange h-[7px] rounded-full",
-          tab: "max-w-fit px-0 h-12",
+          tabList: 'gap-[41px] w-full relative rounded-none p-0 ',
+          cursor: 'w-full bg-orange h-[7px] rounded-full',
+          tab: 'max-w-fit px-0 h-12',
           tabContent:
-            "group-data-[selected=true]:text-orange text-[24px] leading-[29px] text-[#656565] mb-[21px]",
+            'group-data-[selected=true]:text-orange text-[24px] leading-[29px] text-[#656565] mb-[21px]',
         }}
       >
         <Tab key="Story" title="Story">
