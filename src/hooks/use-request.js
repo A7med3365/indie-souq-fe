@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function useRequest({ url, method, body, onSuccess }) {
   const [errors, setErrors] = useState(null);
@@ -31,6 +32,19 @@ export default function useRequest({ url, method, body, onSuccess }) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (errors) {
+      errors.map((e) =>
+        toast.error(e.message, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+        })
+      );
+    }
+  }, [errors]);
 
   return { doRequest, isLoading, isSuccess, errors };
 }

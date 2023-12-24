@@ -19,22 +19,22 @@ export default function UserDashboard({ userId }) {
     {
       name: 'Profile',
       icon: ProfileIcon,
-      link: '/dashboard/profile',
+      // link: '/dashboard/profile',
     },
     {
       name: 'Projects',
       icon: ProjectsIcon,
-      link: '/dashboard/projects',
+      // link: '/dashboard/projects',
     },
     {
       name: 'Analytics',
       icon: AnalyticsIcon,
-      link: '/dashboard/analytics',
+      // link: '/dashboard/analytics',
     },
     {
       name: 'Settings',
       icon: SettingsIcon,
-      link: '/dashboard/settings',
+      // link: '/dashboard/settings',
     },
   ];
   const section = query.get('s');

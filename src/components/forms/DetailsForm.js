@@ -13,14 +13,11 @@ import DropzoneInputMulti from '../DropzoneInputMulti';
 import axios from 'axios';
 
 export default function DetailsForm({
-  title,
-  type,
-  genre,
-  story,
-  media,
+  project,
   setComplete,
   id,
 }) {
+  const { title, type, genre, details: { story, media } = {} } = project || {};
   const [details, setDetails] = useState({
     title: title || '',
     type: type || '',
@@ -55,30 +52,27 @@ export default function DetailsForm({
     const files = Array.from(e.target.files);
     const imagesTemp = files.map((file) => URL.createObjectURL(file));
 
-    let temp = [...images]
-    temp.push(...imagesTemp)
+    let temp = [...images];
+    temp.push(...imagesTemp);
     setImages(temp);
     setFiles(files);
   };
 
   const uploadImages = async () => {
     if (files.length === 0) return;
-    
-    const uploadPromises = files.map(file => {
+
+    const uploadPromises = files.map((file) => {
       const formData = new FormData();
       formData.append('file', file, file.name);
 
-      return axios
-        .post('/api/upload', formData)
-        .then((res) => {
-          // updateDetails('media', [...details.media, res.data.url])
-          return res.data.url
-        }
-        );
-    })
+      return axios.post('/api/upload', formData).then((res) => {
+        // updateDetails('media', [...details.media, res.data.url])
+        return res.data.url;
+      });
+    });
     const urls = Promise.all(uploadPromises);
     return urls;
-  }
+  };
 
   const updateGenre = (genre) => {
     let temp = { ...details };
@@ -121,26 +115,13 @@ export default function DetailsForm({
         return temp;
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
-  const { doRequest,errors } = useRequest({
+  const { doRequest } = useRequest({
     url: `/api/projects/${id}`,
     method: 'put',
   });
-
-  useEffect(() => {
-    if (errors) {
-      errors.map((e) =>
-        toast.error(e.message, {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-        })
-      );
-    }
-  }, [errors]);
 
   return (
     <div className="flex flex-col gap-14 mt-24 mb-12">
@@ -257,21 +238,25 @@ export default function DetailsForm({
           className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
           variant="flat"
           onClick={async (e) => {
-            const toastId = toast.loading("Uploading Images...")
-            const images = await uploadImages();
-            toast.update(toastId, {
-              render: 'Images Uploaded',
-              type: 'success',
-              isLoading: false,
-              autoClose: 5000,
-            });
+            let images = null;
+            if (files.length > 0) {
+              const toastId = toast.loading('Uploading Images...');
+              images = await uploadImages();
+              toast.update(toastId, {
+                render: 'Images Uploaded',
+                type: 'success',
+                isLoading: false,
+                autoClose: 5000,
+              });
+            }
             const p = doRequest({
               title: details.title,
               type: details.type,
               genre: details.genre,
               details: {
+                ...project.details,
                 story: details.story,
-                media: [...media, ...images],
+                media: images ? [...media, ...images] : media,
               },
             });
             toast.promise(p, {

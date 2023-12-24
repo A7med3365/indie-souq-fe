@@ -45,17 +45,13 @@ export default function ProjectCreateUpdate() {
 
   const forms = [
     <DetailsForm
-      title={project.title}
-      type={project.type}
-      genre={project.genre}
-      story={project.details.story}
-      media={project.details.media}
+      project={project}
       setComplete={setComplete}
       id={projectId}
     />,
     <CrewForm />,
-    <FundingForm setComplete={setComplete} />,
-    <BudgetForm setComplete={setComplete} />,
+    <FundingForm setComplete={setComplete} id={projectId} project={project} />,
+    <BudgetForm setComplete={setComplete} id={projectId} project={project} />,
     <RewardForm />,
   ];
 

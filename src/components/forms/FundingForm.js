@@ -1,11 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyDatePicker from '../common/MyDatePicker';
-import { formatDate } from '../../util/dates';
+import { createDateFromString, formatDate } from '../../util/dates';
+import useRequest from '../../hooks/use-request';
+import { toast } from 'react-toastify';
+import { Button } from '@nextui-org/react';
 
-export default function FundingForm() {
-  const [selected, setSelected] = useState(new Date());
-  const [goal, setGoal] = useState();
-  const [stage, setStage] = useState();
+export default function FundingForm({setComplete, id, project}) {
+  const [selected, setSelected] = useState(createDateFromString(project.details.endOfCampaign) || new Date());
+  const [goal, setGoal] = useState(project.details.goal || 0);
+  const [stage, setStage] = useState(project.details.stage || '');
+  const { doRequest } = useRequest({
+    url: `/api/projects/${id}`,
+    method: 'put',
+  });
+
+  useEffect(() => {
+    if (goal > 0 && stage.length > 0) {
+      setComplete((prev) => {
+        let temp = [...prev];
+        temp[2] = true;
+        return temp;
+      });
+    } else {
+      setComplete((prev) => {
+        let temp = [...prev];
+        temp[2] = false;
+        return temp;
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [goal, stage]);
 
   return (
     <div className="flex flex-col gap-14 my-24">
@@ -58,6 +82,36 @@ export default function FundingForm() {
           selected={selected}
           onSelect={setSelected}
         />
+      </div>
+      {/* action buttons */}
+      <div className="flex gap-5 mx-auto mb-11">
+        <Button
+          className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
+          variant="flat"
+          onClick={async (e) => {
+            const p = doRequest({
+              details: {
+                ...project.details,
+                goal: goal,
+                stage: stage,
+                endOfCampaign: formatDate(selected),
+              },
+            });
+            toast.promise(p, {
+              pending: 'Saving...',
+              success: 'Saved successfully',
+              error: 'Error while saving',
+            });
+          }}
+        >
+          <p className="text-orange text-base font-semibold px-2">Save</p>
+        </Button>
+        <Button
+          className="bg-orange w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
+          variant="flat"
+        >
+          <p className="text-white text-base font-semibold px-2">Next</p>
+        </Button>
       </div>
     </div>
   );

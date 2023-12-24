@@ -1,26 +1,43 @@
 // @ts-check
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@nextui-org/react';
 import React, { useEffect, useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import { CloseCircle } from '../ButtonIcons';
 import { toast } from 'react-toastify';
 import { TwitterPicker } from 'react-color';
+import useRequest from '../../hooks/use-request';
 
-export default function BudgetForm({ setComplete }) {
+export default function BudgetForm({ setComplete, id, project }) {
   const [selected, setSelected] = useState(0);
   // const [hovered, setHovered] = useState(undefined);
-  const [sections, setSections] = useState([
-    { title: 'One', value: 10, color: '#E38627' },
-    { title: 'Two', value: 15, color: '#C13C37' },
-    { title: 'Three', value: 20, color: '#6A2135' },
-    // { title: 'Four', value: 25, color: '#1D4E89' },
-    // { title: 'Five', value: 30, color: '#8FB339' },
-    // { title: 'Six', value: 35, color: '#D12B5C' },
-    // { title: 'Seven', value: 40, color: '#FF9800' },
-    // { title: 'Eight', value: 45, color: '#9C27B0' },
-    // { title: 'Nine', value: 50, color: '#03A9F4' },
-    // { title: 'Ten', value: 55, color: '#8BC34A' },
-  ]);
+  const [sections, setSections] = useState(
+    project.budget.map(({ name: title, percentage: value, color }) => ({
+      title,
+      value,
+      color,
+    })) || [
+      { title: 'One', value: 10, color: '#E38627' },
+      { title: 'Two', value: 15, color: '#C13C37' },
+      { title: 'Three', value: 20, color: '#6A2135' },
+      // { title: 'Four', value: 25, color: '#1D4E89' },
+      // { title: 'Five', value: 30, color: '#8FB339' },
+      // { title: 'Six', value: 35, color: '#D12B5C' },
+      // { title: 'Seven', value: 40, color: '#FF9800' },
+      // { title: 'Eight', value: 45, color: '#9C27B0' },
+      // { title: 'Nine', value: 50, color: '#03A9F4' },
+      // { title: 'Ten', value: 55, color: '#8BC34A' },
+    ]
+  );
+  // @ts-ignore
+  const { doRequest } = useRequest({
+    url: `/api/projects/${id}`,
+    method: 'put',
+  });
 
   // color pool
   const colors = [
@@ -167,7 +184,10 @@ export default function BudgetForm({ setComplete }) {
                 />
               </div>
               <div className="h-full">
-                <Popover placement="bottom-end" classNames={{base:['py-0 px-0']}}>
+                <Popover
+                  placement="bottom-end"
+                  classNames={{ base: ['py-0 px-0'] }}
+                >
                   <PopoverTrigger>
                     <div
                       className="border shadow-md rounded-full h-10 w-10 mt-8 cursor-pointer"
@@ -176,7 +196,7 @@ export default function BudgetForm({ setComplete }) {
                   </PopoverTrigger>
                   <PopoverContent>
                     <TwitterPicker
-                      triangle='top-right'
+                      triangle="top-right"
                       colors={colors}
                       color={sections[i].color}
                       onChange={(color) => {
@@ -203,18 +223,37 @@ export default function BudgetForm({ setComplete }) {
           </p>
         </Button>
       </div>
-      {/* <TwitterPicker
-        triangle="top-right"
-        colors={colors}
-        color={sections[0].color}
-        onChange={(color) => {
-          setSections((prev) => {
-            let temp = [...prev];
-            temp[0].color = color.hex;
-            return temp;
-          });
-        }}
-      /> */}
+      {/* action buttons */}
+      <div className="flex gap-5 mx-auto my-11">
+        <Button
+          className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
+          variant="flat"
+          onClick={async (e) => {
+            const p = doRequest({
+              budget: sections.map(
+                ({ title: name, value: percentage, color }) => ({
+                  name,
+                  percentage,
+                  color,
+                })
+              ),
+            });
+            toast.promise(p, {
+              pending: 'Saving...',
+              success: 'Saved successfully',
+              error: 'Error while saving',
+            });
+          }}
+        >
+          <p className="text-orange text-base font-semibold px-2">Save</p>
+        </Button>
+        <Button
+          className="bg-orange w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
+          variant="flat"
+        >
+          <p className="text-white text-base font-semibold px-2">Next</p>
+        </Button>
+      </div>
     </div>
   );
 }
