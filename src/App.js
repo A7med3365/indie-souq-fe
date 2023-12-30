@@ -29,6 +29,7 @@ import RegisterCreator from './pages/RegisterCreator';
 export default function App() {
   const location = useLocation();
   const [isAuth, setIsAuth] = useState(false);
+  const [isFilmmaker, setIsFilmmaker] = useState(false);
   const [hide, setHide] = useState(false);
   // const [userId, setUserId] = useRecoilState(currentUser);
   const [userId, setUserId] = useState(null);
@@ -38,6 +39,7 @@ export default function App() {
     onSuccess: (res) => {
       if (res.data.currentUser) {
         setUserId(res.data.currentUser.id);
+        setIsFilmmaker(res.data.currentUser.isFilmmaker);
         setIsAuth(true);
         // console.log(res.data);
       } else {
@@ -95,6 +97,7 @@ export default function App() {
       {!hide && (
         <Navbar
           userId={userId}
+          isFilmmaker={isFilmmaker}
           isAuth={isAuth}
           isLoading={isLoading}
           logout={logout}
