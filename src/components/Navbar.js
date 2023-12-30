@@ -11,9 +11,11 @@ import {
 import NavbarAvatar from './NavbarAvatar';
 import MyModal from './MyModal';
 import CreateProject from './common/CreateProject';
+import { useNavigate } from 'react-router-dom';
 
-export default function Navbar({ userId, isAuth, logout }) {
+export default function Navbar({ userId, isFilmmaker, isAuth, logout }) {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const nav = useNavigate();
   // const userId = useRecoilValue(currentUser);
   return (
     <>
@@ -60,10 +62,16 @@ export default function Navbar({ userId, isAuth, logout }) {
               <Button
                 className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
                 variant="flat"
-                onClick={onOpen}
+                onClick={() => {
+                  if (isFilmmaker) {
+                    onOpen();
+                  } else {
+                    nav(`/register?id=${userId}`);
+                  }
+                }}
               >
                 <p className="text-orange text-base font-semibold px-2">
-                  New project
+                  {isFilmmaker ? 'New project' : 'Get Started'}
                 </p>
               </Button>
             ) : (
@@ -83,12 +91,16 @@ export default function Navbar({ userId, isAuth, logout }) {
             {isAuth ? (
               <NavbarAvatar userId={userId} logout={logout} />
             ) : (
-              <Link
-                className="text-gray1 text-base font-semibold p-[10px]"
+              <Button
+                className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
+                variant="flat"
+                as={Link}
                 href="/signin"
               >
-                login
-              </Link>
+                <p className="text-orange text-base font-semibold px-2">
+                  Login
+                </p>
+              </Button>
             )}
           </NavbarItem>
         </NavbarContent>
