@@ -8,18 +8,13 @@ import CrewForm from '../components/forms/CrewForm';
 import FundingForm from '../components/forms/FundingForm';
 import BudgetForm from '../components/forms/BudgetForm';
 import RewardForm from '../components/forms/RewardForm';
+import { toast } from 'react-toastify';
 
 export default function ProjectCreateUpdate() {
   const nav = useNavigate();
   const { projectId } = useParams();
-  const [selected, setSelected] = React.useState(0);
-  const [complete, setComplete] = React.useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [selected, setSelected] = React.useState(1);
+  const [complete, setComplete] = React.useState(null);
   const [project, setProject] = useState();
 
   const { doRequest, isLoading } = useRequest({
@@ -27,33 +22,61 @@ export default function ProjectCreateUpdate() {
     method: 'get',
     onSuccess: (res) => {
       setProject(res.data);
+      const progress = [
+        [
+          res.data.progress.details,
+          // res.data.progress.crew,
+          false,
+          res.data.progress.funding,
+          res.data.progress.budget,
+          // res.data.progress.rewards,
+          false,
+        ],
+      ];
+      console.log({progress});
+      setComplete(progress);
       // console.log(res.data);
     },
   });
+
+  const refresh = async () => {
+    await doRequest();
+  };
 
   useEffect(() => {
     const fetchProjectData = async () => {
       await doRequest();
     };
     fetchProjectData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => console.log({complete}), [complete])
+  
+  const { doRequest: publishProject } = useRequest({
+    url: `/api/projects/${projectId}/publish`,
+    method: 'put',
+    body: {
+      isPublished: true,
+    },
+    onSuccess: (res) => {
+      toast.success('Project published successfully!');
+      nav('/dashboard?s=1');
+    },
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   const forms = [
-    <DetailsForm
-      project={project}
-      setComplete={setComplete}
-      id={projectId}
-    />,
+    <DetailsForm project={project} setComplete={setComplete} id={projectId} refresh={refresh} />,
     <CrewForm />,
-    <FundingForm setComplete={setComplete} id={projectId} project={project} />,
-    <BudgetForm setComplete={setComplete} id={projectId} project={project} />,
+    <FundingForm setComplete={setComplete} id={projectId} project={project} refresh={refresh} />,
+    <BudgetForm setComplete={setComplete} id={projectId} project={project} refresh={refresh}/>,
     <RewardForm />,
   ];
+
 
   return (
     <div className="flex flex-grow gap-5 h-[100dvh]">
@@ -75,7 +98,7 @@ export default function ProjectCreateUpdate() {
           <Button
             className="border border-orange bg-[rgb(0,0,0,0)] w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
             variant="flat"
-            disabled = {!(complete[0] && complete[2])}
+            onClick={(e) => publishProject()}
           >
             <p className="text-orange text-base font-semibold px-2">
               Submit project
@@ -86,7 +109,7 @@ export default function ProjectCreateUpdate() {
           <Button
             className="border border-blue-500 hover:bg-blue-500 bg-[rgb(0,0,0,0)] text-blue-500 hover:text-white w-[163px] h-[44.13px] p-[12.56px] rounded-xl"
             variant="flat"
-            onClick={(e) => nav('/dashboard')}
+            onClick={(e) => nav('/dashboard?s=1')}
           >
             <p className="text-base font-semibold px-2">Discard Changes</p>
           </Button>
