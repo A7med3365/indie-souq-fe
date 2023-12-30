@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { TwitterPicker } from 'react-color';
 import useRequest from '../../hooks/use-request';
 
-export default function BudgetForm({ setComplete, id, project }) {
+export default function BudgetForm({ setComplete, id, project, refresh }) {
   const [selected, setSelected] = useState(0);
   // const [hovered, setHovered] = useState(undefined);
   const [sections, setSections] = useState(
@@ -37,6 +37,9 @@ export default function BudgetForm({ setComplete, id, project }) {
   const { doRequest } = useRequest({
     url: `/api/projects/${id}`,
     method: 'put',
+    onSuccess: (res) => {
+      refresh();
+    },
   });
 
   // color pool

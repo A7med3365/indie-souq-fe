@@ -16,6 +16,7 @@ export default function DetailsForm({
   project,
   setComplete,
   id,
+  refresh,
 }) {
   const { title, type, genre, details: { story, media } = {} } = project || {};
   const [details, setDetails] = useState({
@@ -121,6 +122,9 @@ export default function DetailsForm({
   const { doRequest } = useRequest({
     url: `/api/projects/${id}`,
     method: 'put',
+    onSuccess: (res) => {
+      refresh();
+    }
   });
 
   return (

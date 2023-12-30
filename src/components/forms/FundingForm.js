@@ -5,13 +5,18 @@ import useRequest from '../../hooks/use-request';
 import { toast } from 'react-toastify';
 import { Button } from '@nextui-org/react';
 
-export default function FundingForm({setComplete, id, project}) {
-  const [selected, setSelected] = useState(createDateFromString(project.details.endOfCampaign) || new Date());
+export default function FundingForm({ setComplete, id, project, refresh }) {
+  const [selected, setSelected] = useState(
+    createDateFromString(project.details.endOfCampaign) || new Date()
+  );
   const [goal, setGoal] = useState(project.details.goal || 0);
   const [stage, setStage] = useState(project.details.stage || '');
   const { doRequest } = useRequest({
     url: `/api/projects/${id}`,
     method: 'put',
+    onSuccess: (res) => {
+      refresh();
+    },
   });
 
   useEffect(() => {
@@ -28,7 +33,7 @@ export default function FundingForm({setComplete, id, project}) {
         return temp;
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [goal, stage]);
 
   return (
