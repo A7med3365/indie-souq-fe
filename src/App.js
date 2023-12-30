@@ -19,6 +19,7 @@ import ProjectCreateUpdate from './pages/ProjectCreateUpdate';
 import UserDashboard from './pages/UserDashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RegisterCreator from './pages/RegisterCreator';
 
 // import { useRecoilState } from 'recoil';
 // import { currentUser } from './store/states';
@@ -110,6 +111,7 @@ export default function App() {
         <Route path="/project" element={<ProjectCreateUpdate />} />
         <Route path="/project/:projectId" element={<ProjectCreateUpdate />} />
         <Route path="/dashboard" element={<UserDashboard userId={userId} />} />
+        <Route path='/register' element={<RegisterCreator />} />
         <Route path="/t" element={<Tests />} />
       </Routes>
       {!hide && (
