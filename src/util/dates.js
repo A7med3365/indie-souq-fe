@@ -11,3 +11,18 @@ export function createDateFromString(dateString) {
   const [day, month, year] = dateString.split('-');
   return new Date(year, month - 1, day);
 }
+
+export function dateStrFormat(dateString) {
+  // Parse the date
+  const [day, month, year] = dateString.split('-');
+
+  // JavaScript's Date months are 0-indexed, so subtract 1 from the month
+  const date = new Date(year, month - 1, day);
+
+  // Format the date
+  return date.toLocaleString('en-US', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+}
