@@ -6,23 +6,14 @@ import { Button } from '@nextui-org/button';
 import { uploadBase64Files } from '../../util/files';
 
 export default function Profile({ userId }) {
-  const [data, setData] = React.useState({
-    avatar: '',
-    banner: '',
-    firstName: 'ah',
-    lastName: '',
-    location: '',
-    role: '',
-    birthDate: undefined,
-    bio: 'Lorem ipsum dolor sit amet consectetur. Nisi fringilla scelerisque sem etiam fusce sed lectus scelerisque consectetur Dictum sagittis interdum onsectetur.',
-  });
+  const [data, setData] = React.useState(null);
   const [files, setFiles] = React.useState({
     banner: { file: '', fileName: '' },
     avatar: { file: '', fileName: '' },
   });
 
   // getting the profile data
-  const { doRequest, errors } = useRequest({
+  const { doRequest } = useRequest({
     url: `/api/users/${userId}`,
     method: 'get',
     onSuccess: (res) => {
@@ -30,6 +21,10 @@ export default function Profile({ userId }) {
       // console.log(res.data);
     },
   });
+
+  const refresh = async () => {
+    await doRequest();
+  }
 
   useEffect(() => {
     const fetch = async () => {
@@ -39,7 +34,7 @@ export default function Profile({ userId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { doRequest: updateProfile, errors: err2 } = useRequest({
+  const { doRequest: updateProfile } = useRequest({
     url: `/api/users/${userId}`,
     method: 'put',
     body: { ...data },
@@ -60,32 +55,11 @@ export default function Profile({ userId }) {
       isLoading: false,
       autoClose: 2000,
     });
+    refresh();
   };
 
-  if (errors) {
-    errors.map((e) =>
-      toast.error(e.message, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-      })
-    );
-    return <div></div>;
-  }
-
-  if (err2) {
-    err2.map((e) =>
-      toast.error(e.message, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-      })
-    );
-    return <div></div>;
+  if (data === null) {
+    return <div>Loading...</div>;
   }
   return (
     <div>
