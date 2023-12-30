@@ -1,15 +1,18 @@
 import React from 'react';
 import Search from '../components/Search';
 import Creator from '../components/Creator';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Spinner } from '@nextui-org/react';
 import useRequest from '../hooks/use-request';
+import { capitalize } from '../util/str';
 
 export default function Creators() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
   const navigate = useNavigate();
   const [creators, setCreators] = React.useState([]);
   const { doRequest, isLoading, errors } = useRequest({
-    url: '/api/users',
+    url: `/api/users${query.get('all') ? '' : '?filmmakers=1'}`,
     method: 'get',
     onSuccess: (res) => {
       setCreators(res.data);
@@ -50,7 +53,7 @@ export default function Creators() {
               creator={{
                 image: creator.avatar,
                 name: `${creator.firstName} ${creator.lastName}`,
-                role: 'filmmaker',
+                role: capitalize(creator.role),
               }}
               onClick={() => {
                 navigate(`/profile/${creator.id}`);
