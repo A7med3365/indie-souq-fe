@@ -44,7 +44,7 @@ export default function FilmCard({ film, size }) {
   return (
     <div
       onClick={() => {
-        nav('/details');
+        nav(`/details?p=${film.id}`);
       }}
       className="cursor-pointer"
     >
