@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { Button, Input, Spinner } from '@nextui-org/react';
 
 
-export default function CreateProject({ userId, onClose }) {
+export default function CreateProject({ userId, onClose, onProjectCreated = () => { } }) {
   const nav = useNavigate();
   // const userId = useRecoilValue(currentUser);
   const [projectTitle, setTitle] = useState('');
@@ -20,6 +20,7 @@ export default function CreateProject({ userId, onClose }) {
       setLoading(false);
       onClose();
       toast.success('Project created successfully');
+      onProjectCreated();
     },
   });
 
