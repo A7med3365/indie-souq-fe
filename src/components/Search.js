@@ -7,13 +7,14 @@ import {
   Button,
 } from '@nextui-org/react';
 
-export default function Search() {
+export default function Search({setSearch}) {
   return (
     <div className="w-[793px] h-[172px] flex flex-col justify-between">
       <input
         type="search"
         label="Search"
         placeholder="Search"
+        onChange={(e) => setSearch(e.target.value)}
         className="border-[1px] border-[#8B8B8B] rounded-[12px] h-[89px] text-center text-[#4B4B4B] font-medium text-[32px] leading-[39px] placeholder:italic placeholder:text-[#C0C0C0] focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 transition ease-in-out delay-150 shadow-lg focus:shadow-2xl duration-300"
       />
       <div className="flex justify-between">
