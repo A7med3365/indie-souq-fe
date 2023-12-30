@@ -5,7 +5,10 @@ export default function Creator({ creator, onClick }) {
     <div className="flex flex-col gap-4 cursor-pointer" onClick={onClick}>
       <img
         className="rounded-[59px] w-[270px] h-[304px] object-cover"
-        src={creator.image}
+        src={
+          creator.image ||
+          'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Images.png'
+        }
         alt={creator.name}
       />
       <div className="text-center">
