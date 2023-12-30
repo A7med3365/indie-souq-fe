@@ -3,8 +3,20 @@ import GenericLabel1 from '../components/GenericLabel1';
 import { Button, useDisclosure } from '@nextui-org/react';
 import ProgressPar from '../components/ProgressPar';
 import Rewards from './Rewards';
+import { capitalize } from '../util/str';
 
-export default function DetailsCards({ data }) {
+export default function DetailsCards({
+  name,
+  role,
+  location,
+  filmType,
+  genre,
+  fundGoal,
+  fundRaised,
+  Deadline,
+  avatar,
+  stage
+}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <div>
@@ -14,17 +26,17 @@ export default function DetailsCards({ data }) {
             <div className="rounded-full w-[116.5px] h-[116.5px] overflow-hidden">
               <img
                 alt="profile pic"
-                src="https://s3-alpha-sig.figma.com/img/c5ca/141f/b9dbb96c8367255e016576298b0f644a?Expires=1698624000&Signature=SRVIiOo5zZK0L8I~aR-VD0Zpe~kyzWBagSeffg5~8wmZuJB6sMUUbVUS8ciOgpgPYxpfwU9HuGHxGDPhXBlcnsRR7UyNco3ZmFwn9eGrGaShQTZl4v8lS--Cj-LaG-8YgGkPjoNvFhFyFpeZXZuBo6xcwanQQYdBL4g2eN4zDkzS7gHr4DNp~2~4iEuBDjfRBTN4ojJb~VyQPvckWs2xcsRCwT2VZ3CISP3C6t9yBXQupQkTSnKC4~Y1j1Q7HSKIVBXifpkOMecAYZBt79mTsV1wQ4b5aHmmakSO5QRQAz6-LfNu8TyrutDYJybqx7fM3gRFjws4A7lGoazPUZHzfg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                src={avatar}
                 className="w-[116.5px] h-[116.5px] object-cover"
               />
             </div>
             <div className="my-auto flex flex-col gap-[10px]">
               <div>
                 <div className="text-[#656565] text-[24px] font-bold">
-                  {data.name}
+                  {name}
                 </div>
                 <div className="text-[#A5A5A5] text-[16px] font-medium">
-                  {data.role + ' | ' + data.location}
+                  {role + ' | ' + location}
                 </div>
               </div>
               <div className="flex justify-between">
@@ -88,11 +100,11 @@ export default function DetailsCards({ data }) {
 
         <div className="rounded-[27px] w-full h-[432px] border-[1px] border-[#D9D9D9]">
           <div className="px-[38px] py-[57px]">
-            <div className="grid grid-cols-2 gap-x-[40px] gap-y-[46px] mb-[46px]">
-              <GenericLabel1 label={'Film Type'} value={data.filmType} />
-              <GenericLabel1 label={'Genre'} value={data.genre} />
-              <GenericLabel1 label={'Project stage'} value={'Development'} />
-              <GenericLabel1 label={'End of campaign'} value={data.Deadline} />
+            <div className="grid grid-cols-2 gap-x-[37px] gap-y-[46px] mb-[46px]">
+              <GenericLabel1 label={'Film Type'} value={filmType} />
+              <GenericLabel1 label={'Genre'} value={genre} />
+              <GenericLabel1 label={'Project stage'} value={capitalize(stage)} />
+              <GenericLabel1 label={'End of campaign'} value={Deadline} />
             </div>
             <div className="text-[#A5A5A5] text-[18px] leading-[22px] font-medium mb-[10px]">
               Donation Progress
@@ -103,7 +115,7 @@ export default function DetailsCards({ data }) {
                   Raised
                 </p>
                 <p className="text-[#656565] text-[16px] leading-[19px] font-bold">
-                  {'BD ' + data.fundRaised}
+                  {'BD ' + fundRaised}
                 </p>
               </div>
               <div>
@@ -111,12 +123,12 @@ export default function DetailsCards({ data }) {
                   Goal
                 </p>
                 <p className="text-[#656565] text-[16px] leading-[19px] font-bold">
-                  {'BD ' + data.fundGoal}
+                  {'BD ' + fundGoal}
                 </p>
               </div>
             </div>
             <div className="w-full">
-              <ProgressPar p={(data.fundRaised / data.fundGoal) * 100} />
+              <ProgressPar p={(fundRaised / fundGoal) * 100} />
             </div>
           </div>
         </div>
