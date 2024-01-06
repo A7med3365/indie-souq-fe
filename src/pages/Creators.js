@@ -1,6 +1,6 @@
 import React from 'react';
-import Search from '../components/Search';
-import Creator from '../components/Creator';
+import Search from '../components/common/Search';
+import Creator from '../components/common/Creator';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Spinner } from '@nextui-org/react';
 import useRequest from '../hooks/use-request';

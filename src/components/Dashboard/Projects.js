@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useRequest from '../../hooks/use-request';
 import ProjectCard from './ProjectCard';
 import { Spinner, useDisclosure } from '@nextui-org/react';
-import MyModal from '../MyModal';
+import MyModal from '../common/MyModal';
 import CreateProject from '../common/CreateProject';
 import EmptyProjects from './EmptyProjects';
 

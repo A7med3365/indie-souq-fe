@@ -1,5 +1,5 @@
 import React from 'react';
-import SignupBannerAvatar from '../SignupBannerAvatar';
+import SignupBannerAvatar from '../signup/SignupBannerAvatar';
 import MyInput from '../common/MyInput';
 import MyDatePicker from '../common/MyDatePicker';
 import MyTextarea from '../common/MyTextarea';

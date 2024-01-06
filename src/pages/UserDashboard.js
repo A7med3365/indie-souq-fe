@@ -1,7 +1,7 @@
 // ts-check
 import React, { useState } from 'react';
 import Projects from '../components/Dashboard/Projects';
-import Logo from '../components/Logo';
+import Logo from '../components/assets/Logo';
 import {
   AnalyticsIcon,
   ProfileIcon,

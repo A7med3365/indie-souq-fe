@@ -1,6 +1,6 @@
 import React from 'react';
 import { Accordion, AccordionItem } from '@nextui-org/react';
-import AccIndicator from './AccIndicator';
+import AccIndicator from '../assets/AccIndicator';
 
 export default function Faq({ content }) {
   return (

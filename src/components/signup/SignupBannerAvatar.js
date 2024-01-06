@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import UploadImageCrop from '../components/upload-image-crop';
-import { AddIcon, EditIcon } from '../components/ButtonIcons';
+import UploadImageCrop from '../common/upload-image-crop';
+import { AddIcon, EditIcon } from '../assets/ButtonIcons';
 
 export default function SignupBannerAvatar({ data, setData }) {
   const [banner, setBanner] = useState(null);
@@ -12,12 +12,12 @@ export default function SignupBannerAvatar({ data, setData }) {
 
   useEffect(() => {
     setData({ ...data, banner: { file: croppedBanner, fileName: bannerName } });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [croppedBanner, bannerName]);
 
   useEffect(() => {
     setData({ ...data, avatar: { file: croppedAvatar, fileName: avatarName } });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [croppedAvatar, avatarName]);
 
   return (
@@ -41,7 +41,7 @@ export default function SignupBannerAvatar({ data, setData }) {
       <div className="p-[0.9375rem] w-[18.5625rem] h-[18.5625rem] rounded-full bg-white ml-[84px] -translate-y-[9.28125rem] relative">
         <div className="w-[16.625rem] h-[16.625rem] border-[1.644px] border-[#ababab] bg-white rounded-full overflow-hidden">
           {croppedAvatar && (
-            <img alt='' src={croppedAvatar} className="w-full object-cover" />
+            <img alt="" src={croppedAvatar} className="w-full object-cover" />
           )}
         </div>
         <UploadImageCrop

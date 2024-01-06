@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Search from '../components/Search';
-import FilmCard from '../components/FilmCard';
+import Search from '../components/common/Search';
+import FilmCard from '../components/common/FilmCard';
 import useRequest from '../hooks/use-request';
 import { useLocation } from 'react-router-dom';
 

@@ -9,7 +9,7 @@ import {
 } from '@nextui-org/react';
 import useRequest from '../../hooks/use-request';
 import { toast } from 'react-toastify';
-import DropzoneInputMulti from '../DropzoneInputMulti';
+import DropzoneInputMulti from '../common/DropzoneInputMulti';
 import axios from 'axios';
 
 export default function DetailsForm({

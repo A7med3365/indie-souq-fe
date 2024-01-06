@@ -9,7 +9,7 @@ import {
   useDisclosure,
 } from '@nextui-org/react';
 import NavbarAvatar from './NavbarAvatar';
-import MyModal from './MyModal';
+import MyModal from './common/MyModal';
 import CreateProject from './common/CreateProject';
 import { useNavigate } from 'react-router-dom';
 

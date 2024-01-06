@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from '@nextui-org/react';
-import { EyeFilledIcon } from '../EyeFilledIcon';
-import { EyeSlashFilledIcon } from '../EyeSlashFilledIcon';
+import { EyeFilledIcon } from '../assets/EyeFilledIcon';
+import { EyeSlashFilledIcon } from '../assets/EyeSlashFilledIcon';
 
 export default function Step1({ data, setData }) {
   const [isVisible, setIsVisible] = React.useState(false);

@@ -27,6 +27,7 @@
     "recoil": "^0.7.7",
     "web-vitals": "^2.1.4"
   },
+  "proxy": "https://localhost",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

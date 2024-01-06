@@ -1,16 +1,16 @@
 import React from 'react';
-import HeroSection from '../components/HeroSection';
-import TrendCard from '../components/TrendCard';
-import SelectedCreators from '../components/SelectedCreators';
-import SepLine from '../components/SepLine';
-import Faq from '../components/Faq';
-import SelectedComments from '../components/SelectedComments';
-import HomeSection from '../components/HomeSection';
-import HomeNews from '../components/HomeNews';
+import HeroSection from '../components/homePage/HeroSection';
+import TrendCard from '../components/common/TrendCard';
+import SelectedCreators from '../components/homePage/SelectedCreators';
+import SepLine from '../components/assets/SepLine';
+import Faq from '../components/homePage/Faq';
+import SelectedComments from '../components/homePage/SelectedComments';
+import HomeSection from '../components/homePage/HomeSection';
+import HomeNews from '../components/homePage/HomeNews';
 
 import { useNavigate } from 'react-router-dom';
-import HomeHowItWorks from '../components/HomeHowItWorks';
-import ScrollButton from '../components/ScrollButton';
+import HomeHowItWorks from '../components/homePage/HomeHowItWorks';
+import ScrollButton from '../components/homePage/ScrollButton';
 
 export default function HomePage({ setCurrentUser }) {
   const navigate = useNavigate();

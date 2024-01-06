@@ -7,7 +7,7 @@ import {
 } from '@nextui-org/react';
 import React, { useEffect, useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
-import { CloseCircle } from '../ButtonIcons';
+import { CloseCircle } from '../assets/ButtonIcons';
 import { toast } from 'react-toastify';
 import { TwitterPicker } from 'react-color';
 import useRequest from '../../hooks/use-request';

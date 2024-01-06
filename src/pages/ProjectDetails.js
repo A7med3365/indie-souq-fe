@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import DetailsCards from '../components/DetailsCards';
-import DetailsTaps from '../components/DetailsTaps';
-import DetailsPreview from '../components/DetailsPreview';
-import DetailsReactions from '../components/DetailsReactions';
+import DetailsCards from '../components/detailsPage/DetailsCards';
+import DetailsTaps from '../components/detailsPage/DetailsTaps';
+import DetailsPreview from '../components/detailsPage/DetailsPreview';
+import DetailsReactions from '../components/detailsPage/DetailsReactions';
 import { useLocation } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import { capitalize } from '../util/str';

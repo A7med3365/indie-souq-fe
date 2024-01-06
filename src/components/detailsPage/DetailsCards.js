@@ -1,9 +1,9 @@
 import React from 'react';
-import GenericLabel1 from '../components/GenericLabel1';
+import GenericLabel1 from '../common/GenericLabel1';
 import { Button, useDisclosure } from '@nextui-org/react';
-import ProgressPar from '../components/ProgressPar';
+import ProgressPar from '../common/ProgressPar';
 import Rewards from './Rewards';
-import { capitalize } from '../util/str';
+import { capitalize } from '../../util/str';
 
 export default function DetailsCards({
   name,
@@ -15,7 +15,7 @@ export default function DetailsCards({
   fundRaised,
   Deadline,
   avatar,
-  stage
+  stage,
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
@@ -103,7 +103,10 @@ export default function DetailsCards({
             <div className="grid grid-cols-2 gap-x-[37px] gap-y-[46px] mb-[46px]">
               <GenericLabel1 label={'Film Type'} value={filmType} />
               <GenericLabel1 label={'Genre'} value={genre} />
-              <GenericLabel1 label={'Project stage'} value={capitalize(stage)} />
+              <GenericLabel1
+                label={'Project stage'}
+                value={capitalize(stage)}
+              />
               <GenericLabel1 label={'End of campaign'} value={Deadline} />
             </div>
             <div className="text-[#A5A5A5] text-[18px] leading-[22px] font-medium mb-[10px]">

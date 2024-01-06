@@ -1,7 +1,7 @@
 import { Button, Input, Link } from '@nextui-org/react';
 import React, { useEffect } from 'react';
-import { EyeFilledIcon } from '../components/EyeFilledIcon';
-import { EyeSlashFilledIcon } from '../components/EyeSlashFilledIcon';
+import { EyeFilledIcon } from '../components/assets/EyeFilledIcon';
+import { EyeSlashFilledIcon } from '../components/assets/EyeSlashFilledIcon';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 

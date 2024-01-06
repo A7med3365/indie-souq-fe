@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon1, Icon2, Icon3, Icon4 } from '../components/HomeIcons';
+import { Icon1, Icon2, Icon3, Icon4 } from '../assets/HomeIcons';
 
 export default function HomeHowItWorks() {
   let HowItWorks = [
