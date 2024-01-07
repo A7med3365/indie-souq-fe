@@ -115,7 +115,7 @@ export default function App() {
         <Route path="/project/:projectId" element={<ProjectCreateUpdate />} />
         <Route path="/dashboard" element={<UserDashboard userId={userId} />} />
         <Route path='/register' element={<RegisterCreator />} />
-        <Route path="/t" element={<Tests />} />
+        <Route path="/t" element={<Tests userId={userId} />} />
       </Routes>
       {!hide && (
         <div className="bg-footerBg w-full mt-20">
